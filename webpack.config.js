@@ -3,15 +3,11 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = { 
     mode: 'development',
+    context: path.resolve(__dirname, 'src'),
     entry: {
-        index: './src/index.js',
-        todo: './src/todo.js',
-        project: './src/project.js'
-    },
-    output: {
-        filename: '[name].bundle.js',
-        path: path.resolve(__dirname, 'dist'),
-        clean: true,
+        index: './js/index.js',
+        todo: './js/todo.js',
+        project: './js/project.js'
     },
     devtool: 'inline-source-map',
     plugins: [
@@ -20,4 +16,13 @@ module.exports = {
         }),
     ],
     watch: (process.argv.indexOf('--watch') > -1),
+    module: {
+        rules: [{
+        }]
+    },
+    output: {
+        filename: './js/[name].bundle.js',
+        path: path.resolve(__dirname, 'dist'),
+        clean: true,
+    },
 };
