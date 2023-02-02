@@ -6,5 +6,9 @@ export class Todo {
         this.priority = priority;
         this.notes = notes;
     };
+
+    // get title() {
+        
+    // }
 };
 
