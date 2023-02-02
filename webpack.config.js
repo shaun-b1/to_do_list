@@ -18,8 +18,12 @@ module.exports = {
     ],
     watch: (process.argv.indexOf('--watch') > -1),
     module: {
-        rules: [{
-        }]
+        rules: [
+            {
+                test: /\.css$/i,
+                use: ['style-loader', 'css-loader']
+            },
+        ],
     },
     output: {
         filename: './js/[name].bundle.js',
