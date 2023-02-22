@@ -1,11 +1,12 @@
 import '../css/style.css'
+import '../css/reset.css'
 import {Todo} from './todo'
 import {Project} from './project'
 
-let todo = new Todo('Todo', 'A trial todo', '25-01-2023', 'High', 'No notes')
+const myTodo = new Todo("Finish project", "Complete project deliverables", "2023-02-28", "High", "Ask team lead for feedback");
 
-console.log(todo)
-console.log(todo.description)
+console.log(myTodo)
+console.log(myTodo.description)
 
 const project = new Project('Default', "Orange")
 
