@@ -1,4 +1,3 @@
-
 export default (function() {
 
     const container = document.createElement('div')
@@ -7,6 +6,7 @@ export default (function() {
     header.innerText = 'Hello there'
     const main = document.createElement('main')
     main.innerText = 'Hello there'
+    main.innerHTML += `<button id='add_todo'>Click me!</button>`
     const nav = document.createElement('nav')
     nav.innerText = 'Hello there'
     const footer = document.createElement('footer')
