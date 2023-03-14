@@ -7,11 +7,12 @@ export default (function() {
     const main = document.createElement('main')
     main.innerText = 'Hello there'
     main.innerHTML += `<button id='add_todo'>Click me!</button>`
-    const nav = document.createElement('nav')
-    nav.innerText = 'Hello there'
+    const aside = document.createElement('aside')
+    aside.innerText = 'Hello there'
+    aside.innerHTML += `<button id='add_project'>Click me!</button>`
     const footer = document.createElement('footer')
     footer.innerText = 'Hello there'
-    container.append(header, nav, main, footer)
+    container.append(header, aside, main, footer)
     document.body.appendChild(container)
 
 })();
