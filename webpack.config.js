@@ -8,6 +8,7 @@ module.exports = {
         index: './js/index.js',
         todo: './js/todo.js',
         project: './js/project.js',
+        project_page: './js/project_page.js',
         page: './js/page.js'
     },
     devtool: 'inline-source-map',

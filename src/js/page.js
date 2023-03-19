@@ -20,7 +20,7 @@ export default (function() {
 
     const aside = document.createElement('aside')
     aside.innerText = 'Hello there'
-    aside.innerHTML += `<button id='add_project'>Click me!</button>`
+    aside.innerHTML += `<button id='add-project-button'>Click me!</button>`
 
     const footer = document.createElement('footer')
     footer.innerText = 'Hello there'
