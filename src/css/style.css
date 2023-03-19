@@ -22,8 +22,8 @@ body {
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
-    justify-content: space-between;
-    align-items: flex-end;
+    justify-content: center;
+    align-items: flex-start;
     padding: 1rem;
 }
 
@@ -36,11 +36,19 @@ main {
     grid-column: 2 / 3;
     grid-row: 2 / 4;
     background-color: greenyellow;
+    display: flex;
+    justify-content: center;
+    align-items: start;
 }
 
-.add_todo {
-    justify-self: flex-end;
-    align-self: flex-start;
+.title {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
+#add-todo-button {
 }
 
 aside {

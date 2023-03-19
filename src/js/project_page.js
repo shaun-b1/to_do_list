@@ -14,6 +14,7 @@ export default (function() {
     colour.setAttribute("name", "colour")
     colour.setAttribute("placeholder", "Select A Colour")
 
-    const submit = 
+    const submit = document.createElement('button')
+    submit.setAttribute("type", "submit")
     
 })
