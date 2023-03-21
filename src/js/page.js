@@ -6,15 +6,17 @@ export default (function() {
     const header = document.createElement('header')
     header.innerText = 'Hello there'
 
-    const main = document.createElement('main')
     const mainTitle = document.createElement('div')
     mainTitle.classList.add('title')
     const mainTitleText =  document.createElement('h2')
     mainTitleText.innerText = 'Hello there'
+    
     const addTodoButton = document.createElement('button')
     addTodoButton.id = 'add-todo-button'
     addTodoButton.setAttribute('type', 'button')
     addTodoButton.innerText = 'Click me!'
+        
+    const main = document.createElement('main')
     mainTitle.append(mainTitleText, addTodoButton)
     main.appendChild(mainTitle)
 

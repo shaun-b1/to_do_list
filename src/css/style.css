@@ -29,13 +29,13 @@ body {
 
 header {
     grid-column: 1 / -1;
-    background-color: red;
+    background-color: royalblue;
 }
 
 main {
     grid-column: 2 / 3;
     grid-row: 2 / 4;
-    background-color: greenyellow;
+    background-color: gold;
     display: flex;
     justify-content: center;
     align-items: start;
@@ -51,15 +51,16 @@ main {
 aside {
     grid-column: 1 / 2;
     grid-row: 2 / 4;
-    background-color: plum;
+    background-color: green;
 }
 
 footer {
     grid-column: 1 / -1;
-    background-color: darkkhaki;
+    background-color: rebeccapurple;
 }
 
 .modal {
+    display: block;
     position: fixed;
     z-index: 1;
     left: 0;
@@ -71,8 +72,9 @@ footer {
 }
 
 .modal>form {
+    position: relative;
     margin: 0 auto;
-    top: 40%;
+    top: 30%;
     width: 40%;
     height: 30%;
     background: grey;
