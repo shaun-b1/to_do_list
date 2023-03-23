@@ -4,7 +4,7 @@ module.exports = {
     browser: true,
     es2021: true,
   },
-  extends: "eslint:recommended",
+  extends: ["eslint:recommended", "prettier"],
   overrides: [],
   parserOptions: {
     ecmaVersion: "latest",
@@ -12,6 +12,5 @@ module.exports = {
   },
   rules: {
     "no-console": "off",
-    quotes: ["error", "double"],
   },
 };
