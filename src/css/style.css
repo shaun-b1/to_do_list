@@ -79,3 +79,9 @@ footer {
   height: 30%;
   background: grey;
 }
+
+form > div {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+}

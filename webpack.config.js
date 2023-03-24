@@ -7,7 +7,9 @@ module.exports = {
   context: path.resolve(__dirname, "src"),
   entry: {
     index: "./js/index.js",
+    page: "./js/page.js",
     todo: "./js/todo.js",
+    todo_modal: "./js/todo_modal.js",
     project: "./js/project.js",
     project_modal: "./js/project_modal.js",
   },
