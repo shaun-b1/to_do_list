@@ -80,8 +80,9 @@ footer {
   background: grey;
 }
 
-form > div {
+form > * {
     display: flex;
     justify-content: center;
-    align-content: center;
+    align-items: center;
 }
+

@@ -21,6 +21,27 @@ export default (function () {
   const descriptionDiv = document.createElement("div");
   descriptionDiv.appendChild(description);
 
+  const date = document.createElement("input");
+  date.setAttribute("type", "text");
+  date.setAttribute("name", "date");
+  date.setAttribute("placeholder", "New Todo Date");
+  const dateDiv = document.createElement("div");
+  dateDiv.appendChild(date);
+
+  const priority = document.createElement("input");
+  priority.setAttribute("type", "text");
+  priority.setAttribute("name", "priority");
+  priority.setAttribute("placeholder", "New Todo Date");
+  const priorityDiv = document.createElement("div");
+  priorityDiv.appendChild(priority);
+
+  const note = document.createElement("input");
+  note.setAttribute("type", "text");
+  note.setAttribute("name", "date");
+  note.setAttribute("placeholder", "New Todo Date");
+  const noteDiv = document.createElement("div");
+  noteDiv.appendChild(note);
+
   const submit = document.createElement("button");
   submit.setAttribute("type", "submit");
   submit.innerText = "Click me!";

@@ -1,4 +1,14 @@
 export default (function () {
+  const colourArray = {
+    red: "Red",
+    orange: "Orange",
+    yellow: "Yellow",
+    green: "Green",
+    blue: "Blue",
+    rebeccapurple: "Purple",
+    grey: "Grey",
+  };
+
   const addProjectButton = document.getElementById("add-project-button");
 
   const modal = document.createElement("section");
@@ -16,7 +26,14 @@ export default (function () {
 
   const colour = document.createElement("select");
   colour.setAttribute("name", "colour");
-  colour.setAttribute("placeholder", "Select A Colour");
+  colour.options[0] = new Option("-- Select an option --", "");
+  colour.options[0].setAttribute("disabled", "disabled");
+  for (const index in colourArray) {
+    colour.options[colour.options.length] = new Option(
+      colourArray[index],
+      index
+    );
+  }
   const colourDiv = document.createElement("div");
   colourDiv.appendChild(colour);
 
