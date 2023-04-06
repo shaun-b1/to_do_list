@@ -1,4 +1,4 @@
-export default (function () {
+export function projectModal() {
   const colourArray = {
     red: "Red",
     orange: "Orange",
@@ -8,8 +8,6 @@ export default (function () {
     rebeccapurple: "Purple",
     grey: "Grey",
   };
-
-  const addProjectButton = document.getElementById("add-project-button");
 
   const modal = document.createElement("section");
   modal.classList.add("modal");
@@ -40,25 +38,12 @@ export default (function () {
   const submit = document.createElement("button");
   submit.setAttribute("type", "submit");
   submit.innerText = "Click me!";
+  submit.id = "project-submit";
   const submitDiv = document.createElement("div");
   submitDiv.appendChild(submit);
 
   form.append(titleDiv, colourDiv, submitDiv);
   modal.appendChild(form);
-  document.body.appendChild(modal);
 
-  function prevent() {
-    form.addEventListener("submit", (e) => {
-      e.preventDefault();
-    });
-  }
-
-  submit.addEventListener("click", () => {
-    prevent();
-    modal.style.display = "none";
-  });
-
-  addProjectButton.addEventListener("click", () => {
-    modal.style.display = "block";
-  });
-})();
+  return modal;
+}

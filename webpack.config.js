@@ -6,12 +6,14 @@ module.exports = {
   mode: "development",
   context: path.resolve(__dirname, "src"),
   entry: {
-    index: "./js/index.js",
-    page: "./js/page.js",
+    aside: "./js/aside.js",
+    header: "./js/header.js",
+    main: "./js/main.js",
     todo: "./js/todo.js",
     todo_modal: "./js/todo_modal.js",
     project: "./js/project.js",
     project_modal: "./js/project_modal.js",
+    index: "./js/index.js",
   },
   devtool: "inline-source-map",
   plugins: [

@@ -1,6 +1,4 @@
-export default (function () {
-  const addTodoButton = document.getElementById("add-todo-button");
-
+export function toDoModal() {
   const modal = document.createElement("section");
   modal.classList.add("modal");
   modal.id = "todo-modal";
@@ -51,19 +49,4 @@ export default (function () {
   form.append(titleDiv, descriptionDiv, submitDiv);
   modal.appendChild(form);
   document.body.appendChild(modal);
-
-  function prevent() {
-    form.addEventListener("submit", (e) => {
-      e.preventDefault();
-    });
-  }
-
-  submit.addEventListener("click", () => {
-    prevent();
-    modal.style.display = "none";
-  });
-
-  addTodoButton.addEventListener("click", () => {
-    modal.style.display = "block";
-  });
-})();
+}
