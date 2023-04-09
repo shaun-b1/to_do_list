@@ -17,8 +17,26 @@ const projects = [];
 
 const addProjectButton = document.getElementById("add-project-button");
 
-const addTodoButton = document.getElementById("add-todo-button");
-const toDoModal = document.getElementById("to");
+addProjectButton.addEventListener("click", () => {
+  document.body.appendChild(projectModal());
+
+  const projectSubmit = document.getElementById("project-submit");
+  projectSubmit.addEventListener("click", (e) => {
+    e.preventDefault();
+    const newProject = new Project(
+      document.getElementById("title").value,
+      document.getElementById("colour").value
+    );
+    projects.push(newProject);
+    console.log(projects);
+    projectSubmit.parentElement.parentElement.parentElement.remove();
+  });
+});
+
+console.log(projects);
+
+// const addTodoButton = document.getElementById("add-todo-button");
+// const toDoModal = document.getElementById("to");
 
 // submit.addEventListener("click", (e) => {
 //     e.preventDefault;
@@ -28,13 +46,3 @@ const toDoModal = document.getElementById("to");
 //   addTodoButton.addEventListener("click", () => {
 //     modal.style.display = "block";
 //   });
-
-addProjectButton.addEventListener("click", () => {
-  document.body.appendChild(projectModal());
-
-  const projectSubmit = document.getElementById("project-submit");
-  projectSubmit.addEventListener("click", (e) => {
-    e.preventDefault();
-    projectSubmit.parentElement.parentElement.parentElement.remove();
-  });
-});

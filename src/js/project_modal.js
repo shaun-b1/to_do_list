@@ -18,12 +18,14 @@ export function projectModal() {
   const title = document.createElement("input");
   title.setAttribute("type", "text");
   title.setAttribute("name", "Title");
+  title.id = "title";
   title.setAttribute("placeholder", "New Project Title");
   const titleDiv = document.createElement("div");
   titleDiv.appendChild(title);
 
   const colour = document.createElement("select");
   colour.setAttribute("name", "colour");
+  colour.id = "colour";
   colour.options[0] = new Option("-- Select an option --", "");
   colour.options[0].setAttribute("disabled", "disabled");
   for (const index in colourArray) {
