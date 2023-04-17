@@ -30,24 +30,28 @@ function aside(allProjects) {
         document.getElementById("colour").value
       );
       allProjects.push(newProject);
-      projects.appendChild(
-        addProjectToAside(newProject.title, newProject.colour, allProjects)
-      );
+      projects.appendChild(addProjectToAside(newProject, allProjects));
       projectSubmit.parentElement.parentElement.parentElement.remove();
-      console.log(allProjects);
     });
   });
 
   return aside;
 }
 
-function addProjectToAside(title, colour, allProjects) {
+function addProjectToAside(newProject, allProjects) {
   const project = document.createElement("li");
   project.classList.add("project");
 
   const name = document.createElement("h3");
-  name.textContent = `${title}`;
-  name.setAttribute("background-color", `${colour}`);
+  name.textContent = `${newProject.title}`;
+  name.classList.add("title");
+  name.setAttribute("background-color", `${newProject.colour}`);
+
+  project.addEventListener("click", () => {
+    if (project == allProjects.indexOf(this).title) {
+      console.log("Yay!");
+    }
+  });
 
   const button = deleteProject(allProjects);
 
@@ -66,4 +70,4 @@ function deleteProject(allProjects) {
   return button;
 }
 
-export { aside };
+export { aside, addProjectToAside };
