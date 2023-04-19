@@ -1,7 +1,6 @@
-import { projectModal } from "./project_modal";
-import { Project } from "./project";
+import { createProjectModal } from "./project_modal";
 
-function aside(allProjects) {
+function aside() {
   const title = document.createElement("div");
   title.classList.add("title");
   const titleText = document.createElement("h2");
@@ -20,25 +19,13 @@ function aside(allProjects) {
   aside.append(title, projects);
 
   button.addEventListener("click", () => {
-    document.body.appendChild(projectModal());
-
-    const projectSubmit = document.getElementById("project-submit");
-    projectSubmit.addEventListener("click", (e) => {
-      e.preventDefault();
-      const newProject = new Project(
-        document.getElementById("title").value,
-        document.getElementById("colour").value
-      );
-      allProjects.push(newProject);
-      projects.appendChild(addProjectToAside(newProject, allProjects));
-      projectSubmit.parentElement.parentElement.parentElement.remove();
-    });
+    document.body.appendChild(createProjectModal());
   });
 
   return aside;
 }
 
-function addProjectToAside(newProject, allProjects) {
+function addProjectToAside(newProject) {
   const project = document.createElement("li");
   project.classList.add("project");
 
@@ -47,26 +34,17 @@ function addProjectToAside(newProject, allProjects) {
   name.classList.add("title");
   name.setAttribute("background-color", `${newProject.colour}`);
 
-  project.addEventListener("click", () => {
-    if (project == allProjects.indexOf(this).title) {
-      console.log("Yay!");
-    }
-  });
-
-  const button = deleteProject(allProjects);
+  const button = deleteProject();
 
   project.append(name, button);
-  return project;
+  // projects.appendChild(project)
 }
 
-function deleteProject(allProjects) {
+function deleteProject() {
   const button = document.createElement("button");
   button.classList.add("delete-project-button");
   button.textContent = "x";
-  button.addEventListener("click", () => {
-    allProjects.splice(allProjects.indexOf(this), 1);
-    button.parentElement.remove();
-  });
+
   return button;
 }
 

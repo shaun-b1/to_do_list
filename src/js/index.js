@@ -7,24 +7,10 @@ import { aside, addProjectToAside } from "./aside";
 import { header } from "./header";
 import { main, footer } from "./main";
 
-const allProjects = [];
-let currentProject;
-
 const container = document.createElement("div");
 container.classList.add("container");
-container.append(
-  header(),
-  aside(allProjects, currentProject),
-  main(currentProject),
-  footer()
-);
+container.append(header(), aside(), main(), footer());
 document.body.appendChild(container);
-
-const projects = document.getElementById("projects");
-
-const homeProject = new Project("Home", "grey");
-allProjects.push(homeProject);
-projects.appendChild(addProjectToAside(homeProject, allProjects));
 
 // const addTodoButton = document.getElementById("add-todo-button");
 // const toDoModal = document.getElementById("to");
