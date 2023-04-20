@@ -5,9 +5,9 @@ import { editProjectModal } from "./project_modal";
 const projectManager = (function () {
   const projects = [];
   let currentProject;
-  const elements = document.querySelector("#projects");
 
   function findProject(element) {
+    const elements = document.querySelector("#projects");
     const index = Array.from(elements.children).indexOf(element);
     console.log(index);
   }
