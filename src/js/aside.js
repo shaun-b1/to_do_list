@@ -1,4 +1,5 @@
 import { createProjectModal } from "./project_modal";
+import { projectManager } from "./project_manager";
 
 function aside() {
   const title = document.createElement("div");
@@ -10,6 +11,7 @@ function aside() {
   button.id = "add-project-button";
   button.setAttribute("type", "button");
   button.innerText = "Add a new project";
+  button.onclick = () => document.body.appendChild(createProjectModal());
 
   const projects = document.createElement("ul");
   projects.id = "projects";
@@ -18,16 +20,15 @@ function aside() {
   title.append(titleText, button);
   aside.append(title, projects);
 
-  button.addEventListener("click", () => {
-    document.body.appendChild(createProjectModal());
-  });
-
   return aside;
 }
 
 function addProjectToAside(newProject) {
+  const projects = document.getElementById("projects");
+
   const project = document.createElement("li");
   project.classList.add("project");
+  project.onclick = (e) => projectManager.findProject(e.target.parentNode);
 
   const name = document.createElement("h3");
   name.textContent = `${newProject.title}`;
@@ -37,7 +38,7 @@ function addProjectToAside(newProject) {
   const button = deleteProject();
 
   project.append(name, button);
-  // projects.appendChild(project)
+  projects.appendChild(project);
 }
 
 function deleteProject() {

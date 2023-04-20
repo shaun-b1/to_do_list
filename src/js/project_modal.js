@@ -1,6 +1,5 @@
 import { Project } from "./project";
 import { projectManager } from "./project_manager";
-import { addProjectToAside } from "./aside";
 
 const colourArray = {
   red: "Red",
@@ -66,7 +65,7 @@ function editProjectModal() {
   title.setAttribute("type", "text");
   title.setAttribute("name", "Title");
   title.id = "title";
-  title.setAttribute("placeholder", "New Project Title");
+  title.setAttribute("value", ``);
   const titleDiv = document.createElement("div");
   titleDiv.appendChild(title);
 
@@ -105,7 +104,11 @@ function submitNewProject(e, modal) {
     document.getElementById("title").value,
     document.getElementById("colour").value
   );
-  projectManager.projects.push(newProject);
-  addProjectToAside(newProject);
+  projectManager.addProject(newProject);
   modal.remove();
 }
+
+// function submitEditedProject(e, i, modal) {
+//   e.preventDefault
+
+// }
