@@ -47,8 +47,9 @@ function addProjectToAside(newProject) {
 
 function updateProjectInAside(project) {
   const projects = document.getElementById("projects");
+  Array.from(projects.children);
   const editedProject = Array.from(projects.children)
-    .at(project)
+    .at(projectManager.projects.indexOf(project))
     .querySelector(".title");
   editedProject.innerText = `${project.title}`;
   editedProject.setAttribute("style", `background: ${project.colour}`);
@@ -63,7 +64,8 @@ function editProject() {
       editProjectModal(
         projectManager.projects[
           projectManager.findProject(e.target.parentElement)
-        ]
+        ],
+        projectManager.findProject(e.target.parentElement)
       )
     );
   });

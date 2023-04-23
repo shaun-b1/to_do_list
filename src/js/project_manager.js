@@ -1,5 +1,4 @@
 /* eslint-disable no-unused-vars */
-
 import { addProjectToAside, updateProjectInAside } from "./aside";
 
 const projectManager = (function () {
@@ -30,7 +29,6 @@ const projectManager = (function () {
 
   function setCurrentProject(project) {
     currentProject = projects[findProject(project)];
-    console.log(currentProject);
   }
 
   return {
