@@ -44,7 +44,7 @@ function createProjectModal() {
   submit.setAttribute("type", "submit");
   submit.innerText = "Click me!";
   submit.id = "project-submit";
-  submit.addEventListener("click", (e) => submitNewProject(e, modal));
+  submit.onclick = (e) => submitNewProject(e, modal);
   const submitDiv = document.createElement("div");
   submitDiv.appendChild(submit);
 
@@ -54,7 +54,7 @@ function createProjectModal() {
   return modal;
 }
 
-function editProjectModal() {
+function editProjectModal(project) {
   const modal = document.createElement("section");
   modal.classList.add("modal");
   modal.id = "project-modal";
@@ -65,7 +65,7 @@ function editProjectModal() {
   title.setAttribute("type", "text");
   title.setAttribute("name", "Title");
   title.id = "title";
-  title.setAttribute("value", ``);
+  title.setAttribute("value", `${project.title}`);
   const titleDiv = document.createElement("div");
   titleDiv.appendChild(title);
 
@@ -80,6 +80,11 @@ function editProjectModal() {
       index
     );
   }
+  for (var i = 0; i < colour.options.length; i++) {
+    if (colour.options[i].value == project.colour) {
+      colour.options[i].selected = true;
+    }
+  }
   const colourDiv = document.createElement("div");
   colourDiv.appendChild(colour);
 
@@ -87,6 +92,7 @@ function editProjectModal() {
   submit.setAttribute("type", "submit");
   submit.innerText = "Click me!";
   submit.id = "project-submit";
+  submit.onclick = (e) => submitEditedProject(e, project, modal);
   const submitDiv = document.createElement("div");
   submitDiv.appendChild(submit);
 
@@ -108,7 +114,12 @@ function submitNewProject(e, modal) {
   modal.remove();
 }
 
-// function submitEditedProject(e, i, modal) {
-//   e.preventDefault
-
-// }
+function submitEditedProject(e, project, modal) {
+  e.preventDefault();
+  projectManager.editProject(
+    project,
+    document.getElementById("title").value,
+    document.getElementById("colour").value
+  );
+  modal.remove();
+}

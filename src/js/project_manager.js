@@ -1,15 +1,15 @@
 /* eslint-disable no-unused-vars */
-import { addProjectToAside } from "./aside";
-import { editProjectModal } from "./project_modal";
+
+import { addProjectToAside, updateProjectInAside } from "./aside";
 
 const projectManager = (function () {
   const projects = [];
   let currentProject;
 
-  function findProject(element) {
-    const elements = document.querySelector("#projects");
-    const index = Array.from(elements.children).indexOf(element);
-    console.log(index);
+  function findProject(project) {
+    const projects = document.querySelector("#projects");
+    const index = Array.from(projects.children).indexOf(project);
+    return index;
   }
 
   function addProject(project) {
@@ -18,21 +18,19 @@ const projectManager = (function () {
     addProjectToAside(project);
   }
 
-  function openProjectEditor(element) {
-    // open the edit project modal
-    editProjectModal();
-    // find the index of target project
-    // save the index for later use
-    // "get" the name and colour of the project at the index in projects
+  function editProject(project, title, colour) {
+    project.title = title;
+    project.colour = colour;
+    updateProjectInAside(project);
   }
 
-  function editProject(index, name, colour) {
-    // "set" the name and colour of the project at the index in projects to the values in the modal
+  function deleteProject(project) {
+    projects.splice(findProject(project), 1);
   }
 
-  function deleteProject(element) {
-    // find the index of the target project
-    // splice the projects array at the index by one
+  function setCurrentProject(project) {
+    currentProject = projects[findProject(project)];
+    console.log(currentProject);
   }
 
   return {
@@ -40,9 +38,9 @@ const projectManager = (function () {
     currentProject,
     findProject,
     addProject,
-    openProjectEditor,
     editProject,
     deleteProject,
+    setCurrentProject,
   };
 })();
 

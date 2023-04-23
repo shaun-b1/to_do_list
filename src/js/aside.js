@@ -1,4 +1,4 @@
-import { createProjectModal } from "./project_modal";
+import { createProjectModal, editProjectModal } from "./project_modal";
 import { projectManager } from "./project_manager";
 
 function aside() {
@@ -11,7 +11,9 @@ function aside() {
   button.id = "add-project-button";
   button.setAttribute("type", "button");
   button.innerText = "Add a new project";
-  button.onclick = () => document.body.appendChild(createProjectModal());
+  button.addEventListener("click", () =>
+    document.body.appendChild(createProjectModal())
+  );
 
   const projects = document.createElement("ul");
   projects.id = "projects";
@@ -25,28 +27,58 @@ function aside() {
 
 function addProjectToAside(newProject) {
   const projects = document.getElementById("projects");
-
   const project = document.createElement("li");
   project.classList.add("project");
-  project.onclick = (e) => projectManager.findProject(e.target.parentNode);
 
   const name = document.createElement("h3");
   name.textContent = `${newProject.title}`;
   name.classList.add("title");
-  name.setAttribute("background-color", `${newProject.colour}`);
+  name.setAttribute("style", `background: ${newProject.colour}`);
 
-  const button = deleteProject();
+  const editButton = editProject();
+  const deleteButton = deleteProject();
+  project.addEventListener("click", (e) => {
+    projectManager.setCurrentProject(e.target.parentElement);
+  });
 
-  project.append(name, button);
+  project.append(name, editButton, deleteButton);
   projects.appendChild(project);
+}
+
+function updateProjectInAside(project) {
+  const projects = document.getElementById("projects");
+  const editedProject = Array.from(projects.children)
+    .at(project)
+    .querySelector(".title");
+  editedProject.innerText = `${project.title}`;
+  editedProject.setAttribute("style", `background: ${project.colour}`);
+}
+
+function editProject() {
+  const button = document.createElement("button");
+  button.classList.add("edit-project-button");
+  button.textContent = "...";
+  button.addEventListener("click", (e) => {
+    document.body.appendChild(
+      editProjectModal(
+        projectManager.projects[
+          projectManager.findProject(e.target.parentElement)
+        ]
+      )
+    );
+  });
+  return button;
 }
 
 function deleteProject() {
   const button = document.createElement("button");
   button.classList.add("delete-project-button");
   button.textContent = "x";
-
+  button.addEventListener("click", (e) => {
+    projectManager.deleteProject(e.target.parentNode);
+    button.parentElement.remove();
+  });
   return button;
 }
 
-export { aside, addProjectToAside };
+export { aside, addProjectToAside, updateProjectInAside };
