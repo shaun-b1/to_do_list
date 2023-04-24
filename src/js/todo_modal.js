@@ -45,7 +45,7 @@ export function toDoModal() {
 
   form.append(titleDiv, descriptionDiv, dateDiv, priorityDiv, submitDiv);
   modal.appendChild(form);
-  document.body.appendChild(modal);
+  return modal;
 }
 
 function submitNewTodo(e, modal) {

@@ -26,14 +26,20 @@ function aside() {
   return aside;
 }
 
+function addAllProjects() {
+  for (const project in projectManager.projects) {
+    addProjectToAside(project);
+  }
+}
+
 function addProjectToAside(newProject) {
-  const projects = document.getElementById("projects");
+  const projects = document.querySelector("#projects");
   const project = document.createElement("li");
   project.classList.add("project");
 
   const name = document.createElement("h3");
   name.textContent = `${newProject.title}`;
-  name.classList.add("title");
+  name.classList.add("project-title");
   name.setAttribute("style", `background: ${newProject.colour}`);
 
   const editButton = editProject();
@@ -85,4 +91,4 @@ function deleteProject() {
   return button;
 }
 
-export { aside, addProjectToAside, updateProjectInAside };
+export { aside, addAllProjects, addProjectToAside, updateProjectInAside };
