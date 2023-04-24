@@ -41,7 +41,7 @@ main {
   align-items: start;
 }
 
-.title {
+#aside-title, #main-title {
   width: 100%;
   display: flex;
   justify-content: space-between;
@@ -52,6 +52,19 @@ aside {
   grid-column: 1 / 2;
   grid-row: 2 / 4;
   background-color: green;
+}
+
+#projects, #todos {
+  width: 100%;
+  height: 80%;
+  display: flex;
+  flex-direction: column;
+}
+
+.project, .todo {
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
 }
 
 footer {
