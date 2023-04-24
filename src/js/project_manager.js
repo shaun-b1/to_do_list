@@ -1,5 +1,6 @@
 /* eslint-disable no-unused-vars */
 import { addProjectToAside, updateProjectInAside } from "./aside";
+import { updateProjectTitle } from "./main";
 
 const projectManager = (function () {
   const projects = [];
@@ -13,14 +14,16 @@ const projectManager = (function () {
 
   function addProject(project) {
     projects.push(project);
-    currentProject = project;
     addProjectToAside(project);
+    currentProject = project;
+    updateProjectTitle(project);
   }
 
   function editProject(project, title, colour) {
     project.title = title;
     project.colour = colour;
     updateProjectInAside(project);
+    updateProjectTitle(project);
   }
 
   function deleteProject(project) {
@@ -29,6 +32,7 @@ const projectManager = (function () {
 
   function setCurrentProject(project) {
     currentProject = projects[findProject(project)];
+    updateProjectTitle(currentProject);
   }
 
   return {

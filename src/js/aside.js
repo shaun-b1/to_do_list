@@ -1,9 +1,10 @@
 import { createProjectModal, editProjectModal } from "./project_modal";
 import { projectManager } from "./project_manager";
+import { updateProjectTitle } from "./main";
 
 function aside() {
   const title = document.createElement("div");
-  title.classList.add("title");
+  title.id = "aside-title";
   const titleText = document.createElement("h2");
   titleText.innerText = "Projects";
 
@@ -43,6 +44,7 @@ function addProjectToAside(newProject) {
 
   project.append(name, editButton, deleteButton);
   projects.appendChild(project);
+  updateProjectTitle(project);
 }
 
 function updateProjectInAside(project) {

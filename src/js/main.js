@@ -1,13 +1,20 @@
-export function main() {
+import { toDoModal } from "./todo_modal";
+
+export { main, updateProjectTitle, footer };
+
+function main() {
   const title = document.createElement("div");
-  title.classList.add("title");
+  title.id = "main-title";
   const titleText = document.createElement("h2");
-  titleText.innerText = "Hello there";
+  titleText.innerHTML = "lol";
 
   const button = document.createElement("button");
   button.id = "add-todo-button";
   button.setAttribute("type", "button");
   button.innerText = "Click me!";
+  button.addEventListener("click", () => {
+    console.log(toDoModal());
+  });
 
   const main = document.createElement("main");
   title.append(titleText, button);
@@ -16,7 +23,16 @@ export function main() {
   return main;
 }
 
-export function footer() {
+function updateProjectTitle(project) {
+  const projectTitle = document.getElementById("main-title").firstChild;
+  if (project) {
+    projectTitle.innerText = `${project.title}`;
+  } else {
+    projectTitle.innerText = "No Project Selected!";
+  }
+}
+
+function footer() {
   const footer = document.createElement("footer");
   footer.innerText = "Hello there";
 

@@ -20,15 +20,13 @@ function createProjectModal() {
 
   const title = document.createElement("input");
   title.setAttribute("type", "text");
-  title.setAttribute("name", "Title");
-  title.id = "title";
+  title.setAttribute("name", "title");
   title.setAttribute("placeholder", "New Project Title");
   const titleDiv = document.createElement("div");
   titleDiv.appendChild(title);
 
   const colour = document.createElement("select");
   colour.setAttribute("name", "colour");
-  colour.id = "colour";
   colour.options[0] = new Option("-- Select an option --", "");
   colour.options[0].setAttribute("disabled", "disabled");
   for (const index in colourArray) {
@@ -43,7 +41,6 @@ function createProjectModal() {
   const submit = document.createElement("button");
   submit.setAttribute("type", "submit");
   submit.innerText = "Click me!";
-  submit.id = "project-submit";
   submit.onclick = (e) => submitNewProject(e, modal);
   const submitDiv = document.createElement("div");
   submitDiv.appendChild(submit);
@@ -63,15 +60,13 @@ function editProjectModal(project) {
 
   const title = document.createElement("input");
   title.setAttribute("type", "text");
-  title.setAttribute("name", "Title");
-  title.id = "title";
+  title.setAttribute("name", "title");
   title.setAttribute("value", `${project.title}`);
   const titleDiv = document.createElement("div");
   titleDiv.appendChild(title);
 
   const colour = document.createElement("select");
   colour.setAttribute("name", "colour");
-  colour.id = "colour";
   colour.options[0] = new Option("-- Select an option --", "");
   colour.options[0].setAttribute("disabled", "disabled");
   for (const index in colourArray) {
@@ -91,7 +86,6 @@ function editProjectModal(project) {
   const submit = document.createElement("button");
   submit.setAttribute("type", "submit");
   submit.innerText = "Click me!";
-  submit.id = "project-submit";
   submit.onclick = (e) => submitEditedProject(e, project, modal);
   const submitDiv = document.createElement("div");
   submitDiv.appendChild(submit);
@@ -107,8 +101,8 @@ export { createProjectModal, editProjectModal };
 function submitNewProject(e, modal) {
   e.preventDefault();
   const newProject = new Project(
-    document.getElementById("title").value,
-    document.getElementById("colour").value
+    document.querySelector('[name="title"]').value,
+    document.querySelector('[name="colour"]').value
   );
   projectManager.addProject(newProject);
   modal.remove();
@@ -118,8 +112,8 @@ function submitEditedProject(e, project, modal) {
   e.preventDefault();
   projectManager.editProject(
     project,
-    document.getElementById("title").value,
-    document.getElementById("colour").value
+    document.querySelector('[name="title"]').value,
+    document.querySelector('[name="colour"]').value
   );
   modal.remove();
 }
