@@ -1,4 +1,6 @@
-export class Project {
+export { Project };
+
+class Project {
   constructor(title, colour, todos = []) {
     this.title = title;
     this.colour = colour;

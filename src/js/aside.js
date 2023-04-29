@@ -1,17 +1,18 @@
 import { createProjectModal, editProjectModal } from "./project_modal";
 import { projectManager } from "./project_manager";
 import { updateProjectTitle } from "./main";
+export { aside, addAllProjects, addProjectToAside, updateProjectInAside };
 
 function aside() {
   const title = document.createElement("div");
   title.id = "aside-title";
   const titleText = document.createElement("h2");
-  titleText.innerText = "Projects";
+  titleText.textContent = "Projects";
 
   const button = document.createElement("button");
   button.id = "add-project-button";
   button.setAttribute("type", "button");
-  button.innerText = "Add a new project";
+  button.textContent = "Add a new project";
   button.addEventListener("click", () =>
     document.body.appendChild(createProjectModal())
   );
@@ -55,11 +56,10 @@ function addProjectToAside(newProject) {
 
 function updateProjectInAside(project) {
   const projects = document.getElementById("projects");
-  Array.from(projects.children);
   const editedProject = Array.from(projects.children)
     .at(projectManager.projects.indexOf(project))
-    .querySelector(".title");
-  editedProject.innerText = `${project.title}`;
+    .querySelector(".project-title");
+  editedProject.textContent = `${project.title}`;
   editedProject.setAttribute("style", `background: ${project.colour}`);
 }
 
@@ -72,8 +72,7 @@ function editProject() {
       editProjectModal(
         projectManager.projects[
           projectManager.findProject(e.target.parentElement)
-        ],
-        projectManager.findProject(e.target.parentElement)
+        ]
       )
     );
   });
@@ -90,5 +89,3 @@ function deleteProject() {
   });
   return button;
 }
-
-export { aside, addAllProjects, addProjectToAside, updateProjectInAside };

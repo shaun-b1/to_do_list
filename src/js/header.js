@@ -1,6 +1,8 @@
-export function header() {
+export { header };
+
+function header() {
   const header = document.createElement("header");
-  header.innerText = "Hello there";
+  header.textContent = "Hello there";
 
   return header;
 }

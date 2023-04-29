@@ -1,5 +1,6 @@
 import { Project } from "./project";
 import { projectManager } from "./project_manager";
+export { createProjectModal, editProjectModal };
 
 const colourArray = {
   red: "Red",
@@ -40,7 +41,7 @@ function createProjectModal() {
 
   const submit = document.createElement("button");
   submit.setAttribute("type", "submit");
-  submit.innerText = "Click me!";
+  submit.textContent = "Click me!";
   submit.onclick = (e) => submitNewProject(e, modal);
   const submitDiv = document.createElement("div");
   submitDiv.appendChild(submit);
@@ -85,7 +86,7 @@ function editProjectModal(project) {
 
   const submit = document.createElement("button");
   submit.setAttribute("type", "submit");
-  submit.innerText = "Click me!";
+  submit.textContent = "Click me!";
   submit.onclick = (e) => submitEditedProject(e, project, modal);
   const submitDiv = document.createElement("div");
   submitDiv.appendChild(submit);
@@ -95,8 +96,6 @@ function editProjectModal(project) {
 
   return modal;
 }
-
-export { createProjectModal, editProjectModal };
 
 function submitNewProject(e, modal) {
   e.preventDefault();

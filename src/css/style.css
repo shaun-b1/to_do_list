@@ -14,7 +14,7 @@ body {
   width: calc(100vw - 10px);
   display: grid;
   grid-template-columns: minmax(10px, 1fr) minmax(10px, 3fr);
-  grid-template-rows: min-content min-content 1fr min-content;
+  grid-template-rows: min-content 1fr min-content;
   gap: 1px;
 }
 
@@ -34,7 +34,7 @@ header {
 
 main {
   grid-column: 2 / 3;
-  grid-row: 2 / 4;
+  grid-row: 2 / 3;
   background-color: gold;
   display: flex;
   justify-content: center;
@@ -50,7 +50,7 @@ main {
 
 aside {
   grid-column: 1 / 2;
-  grid-row: 2 / 4;
+  grid-row: 2 / 3;
   background-color: green;
 }
 

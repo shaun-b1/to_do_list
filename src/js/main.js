@@ -1,17 +1,20 @@
+import { projectManager } from "./project_manager";
+import { todoManager } from "./todo_manager";
 import { toDoModal } from "./todo_modal";
-export { main, updateProjectTitle, addTodoToMain, footer };
+export { main, addTodoToMain, updateProjectTitle, footer };
 
 function main() {
   const title = document.createElement("div");
   title.id = "main-title";
   const titleText = document.createElement("h2");
-  titleText.innerHTML = "lol";
+  titleText.textContent = "lol";
 
   const button = document.createElement("button");
   button.id = "add-todo-button";
   button.setAttribute("type", "button");
-  button.innerText = "Click me!";
+  button.textContent = "Click me!";
   button.addEventListener("click", () => {
+    todoManager.findTodo();
     document.body.appendChild(toDoModal());
   });
 
@@ -25,15 +28,6 @@ function main() {
   return main;
 }
 
-function updateProjectTitle(project) {
-  const projectTitle = document.getElementById("main-title").firstChild;
-  if (project) {
-    projectTitle.innerText = `${project.title}`;
-  } else {
-    projectTitle.innerText = "No Project Selected!";
-  }
-}
-
 function addTodoToMain(newTodo) {
   const todos = document.querySelector("#todos");
   const todo = document.createElement("li");
@@ -41,32 +35,72 @@ function addTodoToMain(newTodo) {
 
   const title = document.createElement("h3");
   title.classList.add("todo-title");
-  title.innerText = `${newTodo.title}`;
+  title.textContent = `${newTodo.title}`;
 
   const description = document.createElement("p");
   description.classList.add("todo-description");
-  description.innerText = `${newTodo.description}`;
+  description.textContent = `${newTodo.description}`;
 
   const dueDate = document.createElement("p");
   dueDate.classList.add("todo-dueDate");
-  dueDate.innerText = `${newTodo.dueDate}`;
+  dueDate.textContent = `${newTodo.dueDate}`;
 
   const priority = document.createElement("p");
   priority.classList.add("todo-priority");
-  priority.innerText = `${newTodo.priority}`;
+  priority.textContent = `${newTodo.priority}`;
 
   const done = document.createElement("input");
   done.type = "checkbox";
   done.name = "done";
   done.value = true;
 
-  todo.append(done, title, description, dueDate, priority);
+  const editButton = editTodo();
+  const deleteButton = deleteTodo();
+
+  todo.append(
+    done,
+    title,
+    description,
+    dueDate,
+    priority,
+    editButton,
+    deleteButton
+  );
   todos.appendChild(todo);
+}
+
+function updateProjectTitle(project) {
+  const projectTitle = document.getElementById("main-title").firstChild;
+  if (project) {
+    projectTitle.textContent = `${project.title}`;
+  } else {
+    projectTitle.textContent = "No Project Selected!";
+  }
+}
+
+function editTodo() {
+  const button = document.createElement("button");
+  button.classList.add("edit-todo-button");
+  button.textContent = "...";
+  button.addEventListener("click", () => {
+    console.log(projectManager.showCurrentProject().todos);
+  });
+  return button;
+}
+
+function deleteTodo() {
+  const button = document.createElement("button");
+  button.classList.add("delete-todo-button");
+  button.textContent = "x";
+  button.addEventListener("click", (e) => {
+    console.log(todoManager.findTodo(e.target.parentElement));
+  });
+  return button;
 }
 
 function footer() {
   const footer = document.createElement("footer");
-  footer.innerText = "Hello there";
+  footer.textContent = "Hello there";
 
   return footer;
 }

@@ -1,7 +1,8 @@
 import { todoManager } from "./todo_manager";
 import { Todo } from "./todo";
+export { toDoModal };
 
-export function toDoModal() {
+function toDoModal() {
   const modal = document.createElement("section");
   modal.classList.add("modal");
   modal.id = "todo-modal";
@@ -38,7 +39,7 @@ export function toDoModal() {
 
   const submit = document.createElement("button");
   submit.setAttribute("type", "submit");
-  submit.innerText = "Click me!";
+  submit.textContent = "Click me!";
   const submitDiv = document.createElement("div");
   submitDiv.appendChild(submit);
   submit.addEventListener("click", (e) => submitNewTodo(e, modal));

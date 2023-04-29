@@ -3,13 +3,14 @@ import { addTodoToMain } from "./main";
 export { todoManager };
 
 const todoManager = (function () {
-  //   function findTodo(currentProject) {
-  //     console.log(currentProject);
-  //   }
+  function findTodo(todo) {
+    const todos = document.querySelector("#todos");
+    const index = Array.from(todos.children).indexOf(todo);
+    return index;
+  }
 
   function addTodo(todo) {
     projectManager.showCurrentProject().todos.push(todo);
-    console.log(projectManager.showCurrentProject().todos);
     addTodoToMain(todo);
   }
 
@@ -24,5 +25,5 @@ const todoManager = (function () {
   // function completeTodo() {
 
   // }
-  return { addTodo };
+  return { findTodo, addTodo };
 })();
