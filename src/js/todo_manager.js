@@ -1,5 +1,5 @@
 import { projectManager } from "./project_manager";
-import { addTodoToMain, updateTodo } from "./main";
+import { addTodoUI, updateTodo } from "./todo_ui";
 export { todoManager };
 
 const todoManager = (function () {
@@ -11,7 +11,7 @@ const todoManager = (function () {
 
   function addTodo(todo) {
     projectManager.getCurrentProject().todos.push(todo);
-    addTodoToMain(todo);
+    addTodoUI(todo);
   }
 
   function editTodo(todo, title, description, date, priority) {
