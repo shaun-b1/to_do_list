@@ -1,4 +1,4 @@
-import { addProjectToAside, updateProjectInAside } from "./aside";
+import { addProjectToAside, updateProject } from "./aside";
 import { updateProjectTitle } from "./main";
 export { projectManager };
 
@@ -26,7 +26,7 @@ const projectManager = (function () {
   function editProject(project, title, colour) {
     project.title = title;
     project.colour = colour;
-    updateProjectInAside(project);
+    updateProject(project);
     updateProjectTitle(project);
   }
 

@@ -1,7 +1,7 @@
 import { projectManager } from "./project_manager";
 import { todoManager } from "./todo_manager";
 import { toDoModal } from "./todo_modal";
-export { main, addTodoToMain, updateProjectTitle, footer };
+export { main, addTodoToMain, updateProjectTitle, updateTodo, footer };
 
 function main() {
   const title = document.createElement("div");
@@ -12,7 +12,7 @@ function main() {
   const button = document.createElement("button");
   button.id = "add-todo-button";
   button.setAttribute("type", "button");
-  button.textContent = "Click me!";
+  button.textContent = "Add a new todo";
   button.addEventListener("click", () => {
     todoManager.findTodo();
     document.body.appendChild(toDoModal());
@@ -83,10 +83,12 @@ function editTodo() {
   button.classList.add("edit-todo-button");
   button.textContent = "...";
   button.addEventListener("click", (e) => {
-    console.log(
-      projectManager.getCurrentProject().todos[
-        todoManager.findTodo(e.target.parentElement)
-      ]
+    document.body.appendChild(
+      toDoModal(
+        projectManager.getCurrentProject().todos[
+          todoManager.findTodo(e.target.parentElement)
+        ]
+      )
     );
   });
   return button;
@@ -101,6 +103,19 @@ function deleteTodo() {
     button.parentElement.remove();
   });
   return button;
+}
+
+function updateTodo(todo) {
+  const todos = document.querySelector("#todos");
+  const editedTodo = Array.from(todos.children).at(
+    projectManager.getCurrentProject().todos.indexOf(todo)
+  );
+  editedTodo.querySelector(".todo-title").textContent = `${todo.title}`;
+  editedTodo.querySelector(
+    ".todo-description"
+  ).textContent = `${todo.description}`;
+  editedTodo.querySelector(".todo-dueDate").textContent = `${todo.dueDate}`;
+  editedTodo.querySelector(".todo-priority").textContent = `${todo.priority}`;
 }
 
 function footer() {

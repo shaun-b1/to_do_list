@@ -52,7 +52,7 @@ function projectModal(project) {
 
   const submit = document.createElement("button");
   submit.setAttribute("type", "submit");
-  submit.textContent = "Click me!";
+  submit.textContent = "Add Project";
   submit.addEventListener("click", (e) => {
     if (!project) {
       submitNewProject(e, modal);

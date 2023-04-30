@@ -1,7 +1,7 @@
 import { projectModal } from "./project_modal";
 import { projectManager } from "./project_manager";
 import { updateProjectTitle } from "./main";
-export { aside, addAllProjects, addProjectToAside, updateProjectInAside };
+export { aside, addAllProjects, addProjectToAside, updateProject };
 
 function aside() {
   const title = document.createElement("div");
@@ -54,7 +54,7 @@ function addProjectToAside(newProject) {
   updateProjectTitle(project);
 }
 
-function updateProjectInAside(project) {
+function updateProject(project) {
   const projects = document.getElementById("projects");
   const editedProject = Array.from(projects.children)
     .at(projectManager.projects.indexOf(project))

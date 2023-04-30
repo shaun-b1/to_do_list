@@ -1,5 +1,5 @@
 import { projectManager } from "./project_manager";
-import { addTodoToMain } from "./main";
+import { addTodoToMain, updateTodo } from "./main";
 export { todoManager };
 
 const todoManager = (function () {
@@ -14,9 +14,13 @@ const todoManager = (function () {
     addTodoToMain(todo);
   }
 
-  // function editTodo() {
-  //     // logic to edit the selected todo
-  // }
+  function editTodo(todo, title, description, date, priority) {
+    todo.title = title;
+    todo.description = description;
+    todo.dueDate = date;
+    todo.priority = priority;
+    updateTodo(todo);
+  }
 
   function deleteTodo(todo) {
     projectManager.getCurrentProject().todos.splice(findTodo(todo), 1);
@@ -25,5 +29,5 @@ const todoManager = (function () {
   // function completeTodo() {
 
   // }
-  return { findTodo, addTodo, deleteTodo };
+  return { findTodo, addTodo, editTodo, deleteTodo };
 })();
