@@ -82,8 +82,12 @@ function editTodo() {
   const button = document.createElement("button");
   button.classList.add("edit-todo-button");
   button.textContent = "...";
-  button.addEventListener("click", () => {
-    console.log(projectManager.showCurrentProject().todos);
+  button.addEventListener("click", (e) => {
+    console.log(
+      projectManager.getCurrentProject().todos[
+        todoManager.findTodo(e.target.parentElement)
+      ]
+    );
   });
   return button;
 }
@@ -93,7 +97,8 @@ function deleteTodo() {
   button.classList.add("delete-todo-button");
   button.textContent = "x";
   button.addEventListener("click", (e) => {
-    console.log(todoManager.findTodo(e.target.parentElement));
+    todoManager.deleteTodo(e.target.parentElement);
+    button.parentElement.remove();
   });
   return button;
 }

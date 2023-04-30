@@ -10,7 +10,7 @@ const todoManager = (function () {
   }
 
   function addTodo(todo) {
-    projectManager.showCurrentProject().todos.push(todo);
+    projectManager.getCurrentProject().todos.push(todo);
     addTodoToMain(todo);
   }
 
@@ -18,12 +18,12 @@ const todoManager = (function () {
   //     // logic to edit the selected todo
   // }
 
-  // function deleteTodo() {
-  //     // logic to delete the selected todo
-  // }
+  function deleteTodo(todo) {
+    projectManager.getCurrentProject().todos.splice(findTodo(todo), 1);
+  }
 
   // function completeTodo() {
 
   // }
-  return { findTodo, addTodo };
+  return { findTodo, addTodo, deleteTodo };
 })();

@@ -39,7 +39,7 @@ const projectManager = (function () {
     updateProjectTitle(currentProject);
   }
 
-  function showCurrentProject() {
+  function getCurrentProject() {
     return currentProject;
   }
 
@@ -50,6 +50,6 @@ const projectManager = (function () {
     editProject,
     deleteProject,
     setCurrentProject,
-    showCurrentProject,
+    getCurrentProject,
   };
 })();

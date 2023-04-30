@@ -1,4 +1,4 @@
-import { createProjectModal, editProjectModal } from "./project_modal";
+import { projectModal } from "./project_modal";
 import { projectManager } from "./project_manager";
 import { updateProjectTitle } from "./main";
 export { aside, addAllProjects, addProjectToAside, updateProjectInAside };
@@ -14,7 +14,7 @@ function aside() {
   button.setAttribute("type", "button");
   button.textContent = "Add a new project";
   button.addEventListener("click", () =>
-    document.body.appendChild(createProjectModal())
+    document.body.appendChild(projectModal())
   );
 
   const projects = document.createElement("ul");
@@ -69,7 +69,7 @@ function editProject() {
   button.textContent = "...";
   button.addEventListener("click", (e) => {
     document.body.appendChild(
-      editProjectModal(
+      projectModal(
         projectManager.projects[
           projectManager.findProject(e.target.parentElement)
         ]

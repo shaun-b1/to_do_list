@@ -1,6 +1,6 @@
 import { Project } from "./project";
 import { projectManager } from "./project_manager";
-export { createProjectModal, editProjectModal };
+export { projectModal };
 
 const colourArray = {
   red: "Red",
@@ -12,7 +12,7 @@ const colourArray = {
   grey: "Grey",
 };
 
-function createProjectModal() {
+function projectModal(project) {
   const modal = document.createElement("section");
   modal.classList.add("modal");
   modal.id = "project-modal";
@@ -22,7 +22,11 @@ function createProjectModal() {
   const title = document.createElement("input");
   title.setAttribute("type", "text");
   title.setAttribute("name", "title");
-  title.setAttribute("placeholder", "New Project Title");
+  if (!project) {
+    title.setAttribute("placeholder", "New Project Title");
+  } else {
+    title.setAttribute("value", `${project.title}`);
+  }
   const titleDiv = document.createElement("div");
   titleDiv.appendChild(title);
 
@@ -36,49 +40,11 @@ function createProjectModal() {
       index
     );
   }
-  const colourDiv = document.createElement("div");
-  colourDiv.appendChild(colour);
-
-  const submit = document.createElement("button");
-  submit.setAttribute("type", "submit");
-  submit.textContent = "Click me!";
-  submit.onclick = (e) => submitNewProject(e, modal);
-  const submitDiv = document.createElement("div");
-  submitDiv.appendChild(submit);
-
-  form.append(titleDiv, colourDiv, submitDiv);
-  modal.appendChild(form);
-
-  return modal;
-}
-
-function editProjectModal(project) {
-  const modal = document.createElement("section");
-  modal.classList.add("modal");
-  modal.id = "project-modal";
-
-  const form = document.createElement("form");
-
-  const title = document.createElement("input");
-  title.setAttribute("type", "text");
-  title.setAttribute("name", "title");
-  title.setAttribute("value", `${project.title}`);
-  const titleDiv = document.createElement("div");
-  titleDiv.appendChild(title);
-
-  const colour = document.createElement("select");
-  colour.setAttribute("name", "colour");
-  colour.options[0] = new Option("-- Select an option --", "");
-  colour.options[0].setAttribute("disabled", "disabled");
-  for (const index in colourArray) {
-    colour.options[colour.options.length] = new Option(
-      colourArray[index],
-      index
-    );
-  }
-  for (var i = 0; i < colour.options.length; i++) {
-    if (colour.options[i].value == project.colour) {
-      colour.options[i].selected = true;
+  if (project) {
+    for (var i = 0; i < colour.options.length; i++) {
+      if (colour.options[i].value == project.colour) {
+        colour.options[i].selected = true;
+      }
     }
   }
   const colourDiv = document.createElement("div");
@@ -87,7 +53,13 @@ function editProjectModal(project) {
   const submit = document.createElement("button");
   submit.setAttribute("type", "submit");
   submit.textContent = "Click me!";
-  submit.onclick = (e) => submitEditedProject(e, project, modal);
+  submit.addEventListener("click", (e) => {
+    if (!project) {
+      submitNewProject(e, modal);
+    } else {
+      submitEditedProject(e, project, modal);
+    }
+  });
   const submitDiv = document.createElement("div");
   submitDiv.appendChild(submit);
 
