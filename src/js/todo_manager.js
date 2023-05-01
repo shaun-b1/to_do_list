@@ -25,9 +25,5 @@ const todoManager = (function () {
   function deleteTodo(todo) {
     projectManager.getCurrentProject().todos.splice(findTodo(todo), 1);
   }
-
-  // function completeTodo() {
-
-  // }
   return { findTodo, addTodo, editTodo, deleteTodo };
 })();

@@ -1,7 +1,15 @@
 import { projectManager } from "./project_manager";
 import { todoManager } from "./todo_manager";
 import { toDoModal } from "./todo_modal";
-export { addTodoUI, editTodo, updateTodo, deleteTodo };
+export { addAllTodos, addTodoUI, editTodo, updateTodo, deleteTodo };
+
+function addAllTodos() {
+  const todos = document.querySelector("#todos");
+  todos.replaceChildren();
+  for (const todo of projectManager.getCurrentProject().todos) {
+    addTodoUI(todo);
+  }
+}
 
 function addTodoUI(newTodo) {
   const todos = document.querySelector("#todos");
@@ -28,6 +36,17 @@ function addTodoUI(newTodo) {
   done.type = "checkbox";
   done.name = "done";
   done.value = true;
+  done.addEventListener("click", (e) => {
+    congratulations();
+    setTimeout(() => {
+      todoManager.deleteTodo(e.target.parentElement);
+      done.parentElement.remove();
+    }, 1500);
+    setTimeout(() => {
+      const congratulationsModal = document.querySelector(".success-popup");
+      congratulationsModal.remove();
+    }, 3000);
+  });
 
   const editButton = editTodo();
   const deleteButton = deleteTodo();
@@ -82,4 +101,26 @@ function deleteTodo() {
     button.parentElement.remove();
   });
   return button;
+}
+
+function congratulations() {
+  const main = document.querySelector("main");
+  const successPopup = document.createElement("div");
+  const closePopup = document.createElement("div");
+  const button = document.createElement("button");
+  const popupContent = document.createElement("div");
+  const text = document.createElement("p");
+
+  successPopup.classList.add("success-popup");
+  text.textContent = "Congrats! 🎉";
+  button.textContent = "x";
+
+  button.addEventListener("click", () => {
+    successPopup.remove();
+  });
+
+  closePopup.appendChild(button);
+  popupContent.appendChild(text);
+  successPopup.append(closePopup, popupContent);
+  main.append(successPopup);
 }

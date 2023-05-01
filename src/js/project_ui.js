@@ -10,9 +10,10 @@ export {
 };
 
 function addAllProjects() {
-  for (const project in projectManager.projects) {
+  for (const project of projectManager.projects) {
     addProjectUI(project);
   }
+  projectManager.setCurrentProject(0);
 }
 
 function addProjectUI(newProject) {
