@@ -21,18 +21,29 @@ function addProjectUI(newProject) {
   const project = document.createElement("li");
   project.classList.add("project");
 
+  const colour = document.createElement("p");
+  colour.textContent = "•";
+  colour.classList.add("project-colour");
+  colour.setAttribute("style", `color: ${newProject.colour}`);
+
   const name = document.createElement("h3");
   name.textContent = `${newProject.title}`;
   name.classList.add("project-title");
-  name.setAttribute("style", `background: ${newProject.colour}`);
+
+  const nameSection = document.createElement("div");
 
   const editButton = editProject();
   const deleteButton = deleteProject();
+
+  const buttonSection = document.createElement("div");
+
   project.addEventListener("click", (e) => {
-    projectManager.setCurrentProject(e.target.parentElement);
+    projectManager.setCurrentProject(e.currentTarget);
   });
 
-  project.append(name, editButton, deleteButton);
+  nameSection.append(colour, name);
+  buttonSection.append(editButton, deleteButton);
+  project.append(nameSection, buttonSection);
   projects.appendChild(project);
   updateProjectTitle(project);
 }
@@ -44,9 +55,7 @@ function editProject() {
   button.addEventListener("click", (e) => {
     document.body.appendChild(
       projectModal(
-        projectManager.projects[
-          projectManager.findProject(e.target.parentElement)
-        ]
+        projectManager.projects[projectManager.findProject(e.currentTarget)]
       )
     );
   });
@@ -55,11 +64,14 @@ function editProject() {
 
 function updateProject(project) {
   const projects = document.getElementById("projects");
-  const editedProject = Array.from(projects.children)
+  const editedProjectTitle = Array.from(projects.children)
     .at(projectManager.projects.indexOf(project))
     .querySelector(".project-title");
-  editedProject.textContent = `${project.title}`;
-  editedProject.setAttribute("style", `background: ${project.colour}`);
+  editedProjectTitle.textContent = `${project.title}`;
+  const editedProjectColour = Array.from(projects.children)
+    .at(projectManager.projects.indexOf(project))
+    .querySelector(".project-colour");
+  editedProjectColour.setAttribute("style", `color: ${project.colour}`);
 }
 
 function updateProjectTitle(project) {
@@ -76,8 +88,8 @@ function deleteProject() {
   button.classList.add("delete-project-button");
   button.textContent = "x";
   button.addEventListener("click", (e) => {
-    projectManager.deleteProject(e.target.parentNode);
-    button.parentElement.remove();
+    projectManager.deleteProject(e.currentTarget);
+    button.parentElement.parentElement.remove();
   });
   return button;
 }

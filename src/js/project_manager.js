@@ -37,6 +37,7 @@ const projectManager = (function () {
     currentProject = project;
     addProjectUI(project);
     updateProjectTitle(project);
+    addAllTodos();
   }
 
   function editProject(project, title, colour) {
