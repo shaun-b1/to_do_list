@@ -16,8 +16,8 @@ const projectManager = (function () {
         },
       ],
     },
-    { title: "inbox", colour: "blue", todos: [] },
-    { title: "random", colour: "yellow", todos: [] },
+    { title: "Inbox", colour: "blue", todos: [] },
+    { title: "RaNdOm", colour: "yellow", todos: [] },
   ];
   let currentProject;
 

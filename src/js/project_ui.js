@@ -1,5 +1,7 @@
 import { projectManager } from "./project_manager";
 import { projectModal } from "./project_modal";
+// eslint-disable-next-line no-unused-vars
+import { MaterialIcon } from "material-icons";
 export {
   addAllProjects,
   addProjectUI,
@@ -36,6 +38,7 @@ function addProjectUI(newProject) {
   const deleteButton = deleteProject();
 
   const buttonSection = document.createElement("div");
+  buttonSection.classList.add("project-button-section");
 
   project.addEventListener("click", (e) => {
     projectManager.setCurrentProject(e.currentTarget);
@@ -51,7 +54,7 @@ function addProjectUI(newProject) {
 function editProject() {
   const button = document.createElement("button");
   button.classList.add("edit-project-button");
-  button.textContent = "...";
+  button.innerHTML = `<span class="material-icons">border_color</span>`;
   button.addEventListener("click", (e) => {
     document.body.appendChild(
       projectModal(
@@ -86,7 +89,7 @@ function updateProjectTitle(project) {
 function deleteProject() {
   const button = document.createElement("button");
   button.classList.add("delete-project-button");
-  button.textContent = "x";
+  button.innerHTML = `<span class="material-icons">delete_outline</span>`;
   button.addEventListener("click", (e) => {
     projectManager.deleteProject(e.currentTarget);
     button.parentElement.parentElement.remove();

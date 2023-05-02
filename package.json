@@ -37,5 +37,8 @@
       "eslint",
       "prettier --write"
     ]
+  },
+  "dependencies": {
+    "material-icons": "^1.13.6"
   }
 }
