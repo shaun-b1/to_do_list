@@ -1,4 +1,5 @@
 import { projectModal } from "./project_modal";
+import "material-icons/iconfont/round.css";
 export { aside };
 
 function aside() {
@@ -10,10 +11,20 @@ function aside() {
   const button = document.createElement("button");
   button.id = "add-project-button";
   button.setAttribute("type", "button");
-  button.textContent = "Add a new project";
-  button.addEventListener("click", () =>
-    document.body.appendChild(projectModal())
-  );
+  button.innerHTML =
+    `<span class="material-icons-round">add</span>` + "<p>Add project</p>";
+  button.addEventListener("click", () => {
+    document.body.appendChild(projectModal());
+  });
+  button.addEventListener("mouseover", () => {
+    button.innerHTML =
+      `<span class="material-icons-round">add_circle</span>` +
+      "<p>Add project</p>";
+  });
+  button.addEventListener("mouseout", () => {
+    button.innerHTML =
+      `<span class="material-icons-round">add</span>` + "<p>Add project</p>";
+  });
 
   const projects = document.createElement("ul");
   projects.id = "projects";

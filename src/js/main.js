@@ -29,7 +29,7 @@ function main() {
 
 function footer() {
   const footer = document.createElement("footer");
-  footer.textContent = "Hello there";
+  footer.innerHTML = `<p>Made by <a href="https://github.com/shaun-b1">Shaun MacWilliam</a> in &#x1F1EC;&#x1F1E7;</p>`;
 
   return footer;
 }
