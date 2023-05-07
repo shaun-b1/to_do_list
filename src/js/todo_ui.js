@@ -1,6 +1,7 @@
 import { projectManager } from "./project_manager";
 import { todoManager } from "./todo_manager";
 import { toDoModal } from "./todo_modal";
+import { format, parseISO } from "date-fns";
 export { addAllTodos, addTodoUI, editTodo, updateTodo, deleteTodo };
 
 function addAllTodos() {
@@ -26,40 +27,32 @@ function addTodoUI(newTodo) {
 
   const dueDate = document.createElement("p");
   dueDate.classList.add("todo-dueDate");
-  dueDate.textContent = `${newTodo.dueDate}`;
+  dueDate.textContent = format(parseISO(newTodo.dueDate), "E, do MMM");
 
-  const priority = document.createElement("p");
-  priority.classList.add("todo-priority");
-  priority.textContent = `${newTodo.priority}`;
-
-  const done = document.createElement("input");
-  done.type = "checkbox";
-  done.name = "done";
-  done.value = true;
-  done.addEventListener("click", (e) => {
+  const done = document.createElement("div");
+  done.classList.add("done");
+  const doneInput = document.createElement("input");
+  doneInput.type = "checkbox";
+  doneInput.id = `done-input-${newTodo.creationDate}`;
+  doneInput.addEventListener("click", (e) => {
     congratulations();
     setTimeout(() => {
-      todoManager.deleteTodo(e.target.parentElement);
-      done.parentElement.remove();
+      todoManager.deleteTodo(e.target.parentElement.parentElement);
+      doneInput.parentElement.parentElement.remove();
     }, 1500);
     setTimeout(() => {
       const congratulationsModal = document.querySelector(".success-popup");
       congratulationsModal.remove();
     }, 3000);
   });
+  const doneLabel = document.createElement("label");
+  doneLabel.htmlFor = `done-input-${newTodo.creationDate}`;
+  done.append(doneInput, doneLabel);
 
   const editButton = editTodo();
   const deleteButton = deleteTodo();
 
-  todo.append(
-    done,
-    title,
-    description,
-    dueDate,
-    priority,
-    editButton,
-    deleteButton
-  );
+  todo.append(done, title, description, dueDate, editButton, deleteButton);
   todos.appendChild(todo);
 }
 

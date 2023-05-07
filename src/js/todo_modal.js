@@ -93,6 +93,7 @@ function submitNewTodo(e, modal) {
     document.querySelector('[name="priority"]').value
   );
   todoManager.addTodo(newTodo);
+  console.log(newTodo.creationDate);
   modal.remove();
 }
 
