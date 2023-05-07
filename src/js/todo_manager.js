@@ -12,6 +12,7 @@ const todoManager = (function () {
   function addTodo(todo) {
     projectManager.getCurrentProject().todos.push(todo);
     addTodoUI(todo);
+    localStorage.setItem("projects", JSON.stringify(projectManager.projects));
   }
 
   function editTodo(todo, title, description, date, priority) {
@@ -20,10 +21,12 @@ const todoManager = (function () {
     todo.dueDate = date;
     todo.priority = priority;
     updateTodo(todo);
+    localStorage.setItem("projects", JSON.stringify(projectManager.projects));
   }
 
   function deleteTodo(todo) {
     projectManager.getCurrentProject().todos.splice(findTodo(todo), 1);
+    localStorage.setItem("projects", JSON.stringify(projectManager.projects));
   }
   return { findTodo, addTodo, editTodo, deleteTodo };
 })();

@@ -17,17 +17,22 @@ function addTodoUI(newTodo) {
   const todo = document.createElement("li");
   todo.classList.add("todo");
 
+  const todoContent = document.createElement("div");
+  todoContent.classList.add("todo-content");
+
   const title = document.createElement("h3");
   title.classList.add("todo-title");
-  title.textContent = `${newTodo.title}`;
+  title.textContent = `${newTodo._title}`;
 
   const description = document.createElement("p");
   description.classList.add("todo-description");
-  description.textContent = `${newTodo.description}`;
+  description.textContent = `${newTodo._description}`;
 
   const dueDate = document.createElement("p");
   dueDate.classList.add("todo-dueDate");
-  dueDate.textContent = format(parseISO(newTodo.dueDate), "E, do MMM");
+  dueDate.textContent = format(parseISO(newTodo._dueDate), "E, do MMM");
+
+  todoContent.append(title, description, dueDate);
 
   const done = document.createElement("div");
   done.classList.add("done");
@@ -49,22 +54,27 @@ function addTodoUI(newTodo) {
   doneLabel.htmlFor = `done-input-${newTodo.creationDate}`;
   done.append(doneInput, doneLabel);
 
+  const buttonSection = document.createElement("div");
+  buttonSection.classList.add("todo-button-section");
   const editButton = editTodo();
   const deleteButton = deleteTodo();
+  buttonSection.append(editButton, deleteButton);
 
-  todo.append(done, title, description, dueDate, editButton, deleteButton);
+  todo.append(done, todoContent, buttonSection);
   todos.appendChild(todo);
 }
 
 function editTodo() {
   const button = document.createElement("button");
   button.classList.add("edit-todo-button");
-  button.textContent = "...";
+  button.innerHTML = `<span class="material-icons-round">edit</span>`;
   button.addEventListener("click", (e) => {
     document.body.appendChild(
       toDoModal(
         projectManager.getCurrentProject().todos[
-          todoManager.findTodo(e.target.parentElement)
+          todoManager.findTodo(
+            e.target.parentElement.parentElement.parentElement
+          )
         ]
       )
     );
@@ -77,21 +87,23 @@ function updateTodo(todo) {
   const editedTodo = Array.from(todos.children).at(
     projectManager.getCurrentProject().todos.indexOf(todo)
   );
-  editedTodo.querySelector(".todo-title").textContent = `${todo.title}`;
+  editedTodo.querySelector(".todo-title").textContent = `${todo._title}`;
   editedTodo.querySelector(
     ".todo-description"
-  ).textContent = `${todo.description}`;
-  editedTodo.querySelector(".todo-dueDate").textContent = `${todo.dueDate}`;
-  editedTodo.querySelector(".todo-priority").textContent = `${todo.priority}`;
+  ).textContent = `${todo._description}`;
+  editedTodo.querySelector(".todo-dueDate").textContent = format(
+    parseISO(todo._dueDate),
+    "E, do MMM"
+  );
 }
 
 function deleteTodo() {
   const button = document.createElement("button");
   button.classList.add("delete-todo-button");
-  button.textContent = "x";
+  button.innerHTML = `<span class="material-icons-round">delete_outline</span>`;
   button.addEventListener("click", (e) => {
     todoManager.deleteTodo(e.target.parentElement);
-    button.parentElement.remove();
+    button.parentElement.parentElement.remove();
   });
   return button;
 }

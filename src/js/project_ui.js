@@ -11,10 +11,10 @@ export {
 };
 
 function addAllProjects() {
-  for (const project of projectManager.projects) {
+  let projects = projectManager.getFromLocalStorage();
+  for (const project of projects) {
     addProjectUI(project);
   }
-  projectManager.setCurrentProject(0);
 }
 
 function addProjectUI(newProject) {
@@ -25,10 +25,10 @@ function addProjectUI(newProject) {
   const colour = document.createElement("p");
   colour.textContent = "•";
   colour.classList.add("project-colour");
-  colour.setAttribute("style", `color: ${newProject.colour}`);
+  colour.setAttribute("style", `color: ${newProject._colour}`);
 
   const name = document.createElement("h3");
-  name.textContent = `${newProject.title}`;
+  name.textContent = `${newProject._title}`;
   name.classList.add("project-title");
 
   const nameSection = document.createElement("div");
@@ -57,7 +57,11 @@ function editProject() {
   button.addEventListener("click", (e) => {
     document.body.appendChild(
       projectModal(
-        projectManager.projects[projectManager.findProject(e.currentTarget)]
+        projectManager.projects[
+          projectManager.findProject(
+            e.currentTarget.parentElement.parentElement
+          )
+        ]
       )
     );
   });
@@ -69,17 +73,17 @@ function updateProject(project) {
   const editedProjectTitle = Array.from(projects.children)
     .at(projectManager.projects.indexOf(project))
     .querySelector(".project-title");
-  editedProjectTitle.textContent = `${project.title}`;
+  editedProjectTitle.textContent = `${project._title}`;
   const editedProjectColour = Array.from(projects.children)
     .at(projectManager.projects.indexOf(project))
     .querySelector(".project-colour");
-  editedProjectColour.setAttribute("style", `color: ${project.colour}`);
+  editedProjectColour.setAttribute("style", `color: ${project._colour}`);
 }
 
 function updateProjectTitle(project) {
   const projectTitle = document.getElementById("main-title").firstChild;
   if (project) {
-    projectTitle.textContent = `${project.title}`;
+    projectTitle.textContent = `${project._title}`;
   } else {
     projectTitle.textContent = "No Project Selected!";
   }
@@ -90,7 +94,7 @@ function deleteProject() {
   button.classList.add("delete-project-button");
   button.innerHTML = `<span class="material-icons-round">delete_outline</span>`;
   button.addEventListener("click", (e) => {
-    projectManager.deleteProject(e.currentTarget);
+    projectManager.deleteProject(e.currentTarget.parentElement.parentElement);
     button.parentElement.parentElement.remove();
   });
   return button;

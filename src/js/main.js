@@ -11,7 +11,8 @@ function main() {
   const button = document.createElement("button");
   button.id = "add-todo-button";
   button.setAttribute("type", "button");
-  button.textContent = "Add a new todo";
+  button.innerHTML =
+    `<span class="material-icons-round"></span>` + "<p>Add todo</p>";
   button.addEventListener("click", () => {
     todoManager.findTodo();
     document.body.appendChild(toDoModal());

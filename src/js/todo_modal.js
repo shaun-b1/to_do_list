@@ -1,5 +1,6 @@
 import { todoManager } from "./todo_manager";
 import { Todo } from "./todo";
+import { projectManager } from "./project_manager";
 export { toDoModal };
 
 const todoPriority = {
@@ -93,7 +94,7 @@ function submitNewTodo(e, modal) {
     document.querySelector('[name="priority"]').value
   );
   todoManager.addTodo(newTodo);
-  console.log(newTodo.creationDate);
+  console.log(projectManager.getCurrentProject().todos);
   modal.remove();
 }
 

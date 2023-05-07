@@ -95,24 +95,24 @@ li:hover {
   margin: 1rem;
 }
 
-#add-project-button {
+#add-project-button, #add-todo-button {
   display: flex;
   justify-content: center;
   flex-wrap: nowrap;
   align-items: center;
 }
 
-#add-project-button:hover {
+#add-project-button:hover, #add-todo-button:hover {
   background-color: unset;
   color: var(--highlight)
 }
 
-#add-project-button .material-icons-round::before {
+#add-project-button .material-icons-round::before, #add-todo-button .material-icons-round::before {
   color: var(--highlight);
   content: "add";
 }
 
-#add-project-button:hover .material-icons-round::before{
+#add-project-button:hover .material-icons-round::before, #add-todo-button:hover .material-icons-round::before {
   color: var(--highlight);
   content: "add_circle";
 }
@@ -138,7 +138,7 @@ li:hover {
   padding: 5px;
 }
 
-.project-button-section, .todo:first-child{
+.project-button-section {
   padding: 5px;
 }
 
@@ -149,7 +149,7 @@ li:hover {
   min-width: 50%;
 }
 
-.project-button-section > * > .material-icons-round {
+.project-button-section > * > .material-icons-round, .todo-button-section > * > .material-icons-round {
   font-size: 1rem;
   padding: 5px;
 }
@@ -164,10 +164,17 @@ li:hover {
 
 .todo {
   background-color: var(--off-white-two);
+  padding: 15px;
+  margin-bottom: 0.7rem;
+}
+
+.todo-content {
+  flex-grow: 2;
 }
 
 .done {
   position: relative;
+  padding: 10px;
 }
 
 .done label {
@@ -175,11 +182,11 @@ li:hover {
   border: 1px solid #ccc;
   border-radius: 50%;
   cursor: pointer;
-  height: 28px;
+  height: 18px;
   left: 0;
   position: absolute;
-  top: 0;
-  width: 28px;
+  top: 50;
+  width: 18px;
 }
 
 .done label:after {
@@ -187,13 +194,13 @@ li:hover {
   border-top: none;
   border-right: none;
   content: "";
-  height: 6px;
-  left: 7px;
+  height: 4px;
+  left: 4px;
   opacity: 0;
   position: absolute;
-  top: 8px;
+  top: 5px;
   transform: rotate(-45deg);
-  width: 12px;
+  width: 8px;
 }
 
 .done input[type="checkbox"] {

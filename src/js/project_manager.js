@@ -3,22 +3,24 @@ import { addAllTodos } from "./todo_ui";
 export { projectManager };
 
 const projectManager = (function () {
-  const projects = [
-    {
-      title: "Home",
-      colour: "orange",
-      todos: [
-        {
-          title: "Hello World",
-          description: "This is a todo in the 'Home' project",
-          dueDate: "2023-05-13",
-          priority: "4",
-        },
-      ],
-    },
-    { title: "Inbox", colour: "blue", todos: [] },
-    { title: "RaNdOm", colour: "yellow", todos: [] },
-  ];
+  const projects = getFromLocalStorage();
+  // [
+  //   {
+  //     title: "Home",
+  //     colour: "orange",
+  //     todos: [
+  //       {
+  //         title: "Hello World",
+  //         description: "This is a todo in the 'Home' project",
+  //         dueDate: "2023-05-13",
+  //         priority: "4",
+  //         creationDate: 1683471038
+  //       },
+  //     ],
+  //   },
+  //   { title: "Inbox", colour: "blue", todos: [] },
+  //   { title: "RaNdOm", colour: "yellow", todos: [] },
+  // ];
   let currentProject;
 
   function findProject(project) {
@@ -38,17 +40,20 @@ const projectManager = (function () {
     addProjectUI(project);
     updateProjectTitle(project);
     addAllTodos();
+    localStorage.setItem("projects", JSON.stringify(projects));
   }
 
   function editProject(project, title, colour) {
-    project.title = title;
-    project.colour = colour;
+    project._title = title;
+    project._colour = colour;
     updateProject(project);
     updateProjectTitle(project);
+    localStorage.setItem("projects", JSON.stringify(projects));
   }
 
   function deleteProject(project) {
     projects.splice(findProject(project), 1);
+    localStorage.setItem("projects", JSON.stringify(projects));
   }
 
   function setCurrentProject(project) {
@@ -61,14 +66,18 @@ const projectManager = (function () {
     return currentProject;
   }
 
+  function getFromLocalStorage() {
+    return JSON.parse(localStorage.getItem("projects") || "[]");
+  }
+
   return {
     projects,
-
     findProject,
     addProject,
     editProject,
     deleteProject,
     setCurrentProject,
     getCurrentProject,
+    getFromLocalStorage,
   };
 })();

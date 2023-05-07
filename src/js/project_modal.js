@@ -25,7 +25,7 @@ function projectModal(project) {
   if (!project) {
     title.setAttribute("placeholder", "New Project Title");
   } else {
-    title.setAttribute("value", `${project.title}`);
+    title.setAttribute("value", `${project._title}`);
   }
   const titleDiv = document.createElement("div");
   titleDiv.appendChild(title);
@@ -42,7 +42,7 @@ function projectModal(project) {
   }
   if (project) {
     for (var i = 0; i < colour.options.length; i++) {
-      if (colour.options[i].value == project.colour) {
+      if (colour.options[i].value == project._colour) {
         colour.options[i].selected = true;
       }
     }
