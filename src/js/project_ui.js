@@ -52,8 +52,8 @@ function addProjectUI(newProject) {
 
 function editProject() {
   const button = document.createElement("button");
-  button.classList.add("edit-project-button");
-  button.innerHTML = `<span class="material-icons-round">edit</span>`;
+  button.classList.add("edit-project-button", "material-icons-round");
+  button.textContent = "edit";
   button.addEventListener("click", (e) => {
     document.body.appendChild(
       projectModal(
@@ -91,8 +91,8 @@ function updateProjectTitle(project) {
 
 function deleteProject() {
   const button = document.createElement("button");
-  button.classList.add("delete-project-button");
-  button.innerHTML = `<span class="material-icons-round">delete_outline</span>`;
+  button.classList.add("delete-project-button", "material-icons-round");
+  button.textContent = "delete_outline";
   button.addEventListener("click", (e) => {
     projectManager.deleteProject(e.currentTarget.parentElement.parentElement);
     button.parentElement.parentElement.remove();

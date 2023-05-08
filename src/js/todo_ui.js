@@ -66,15 +66,13 @@ function addTodoUI(newTodo) {
 
 function editTodo() {
   const button = document.createElement("button");
-  button.classList.add("edit-todo-button");
-  button.innerHTML = `<span class="material-icons-round">edit</span>`;
+  button.classList.add("edit-todo-button", "material-icons-round");
+  button.textContent = "edit";
   button.addEventListener("click", (e) => {
     document.body.appendChild(
       toDoModal(
         projectManager.getCurrentProject().todos[
-          todoManager.findTodo(
-            e.target.parentElement.parentElement.parentElement
-          )
+          todoManager.findTodo(e.target.parentElement.parentElement)
         ]
       )
     );
@@ -99,8 +97,8 @@ function updateTodo(todo) {
 
 function deleteTodo() {
   const button = document.createElement("button");
-  button.classList.add("delete-todo-button");
-  button.innerHTML = `<span class="material-icons-round">delete_outline</span>`;
+  button.classList.add("delete-todo-button", "material-icons-round");
+  button.textContent = "delete_outline";
   button.addEventListener("click", (e) => {
     todoManager.deleteTodo(e.target.parentElement);
     button.parentElement.parentElement.remove();
