@@ -31,7 +31,12 @@ function addProjectUI(newProject) {
   name.textContent = `${newProject._title}`;
   name.classList.add("project-title");
 
-  const nameSection = document.createElement("div");
+  const projectSelector = document.createElement("button");
+  projectSelector.classList.add("project-selector");
+
+  projectSelector.addEventListener("click", (e) => {
+    projectManager.setCurrentProject(e.currentTarget.parentElement);
+  });
 
   const editButton = editProject();
   const deleteButton = deleteProject();
@@ -39,13 +44,9 @@ function addProjectUI(newProject) {
   const buttonSection = document.createElement("div");
   buttonSection.classList.add("project-button-section");
 
-  project.addEventListener("click", (e) => {
-    projectManager.setCurrentProject(e.currentTarget);
-  });
-
-  nameSection.append(colour, name);
+  projectSelector.append(colour, name);
   buttonSection.append(editButton, deleteButton);
-  project.append(nameSection, buttonSection);
+  project.append(projectSelector, buttonSection);
   projects.appendChild(project);
   updateProjectTitle(project);
 }
@@ -82,10 +83,10 @@ function updateProject(project) {
 
 function updateProjectTitle(project) {
   const projectTitle = document.getElementById("main-title").firstChild;
-  if (project) {
-    projectTitle.textContent = `${project._title}`;
-  } else {
+  if (!project) {
     projectTitle.textContent = "No Project Selected!";
+  } else {
+    projectTitle.textContent = `${project._title}`;
   }
 }
 

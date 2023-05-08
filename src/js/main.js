@@ -6,7 +6,7 @@ function main() {
   const title = document.createElement("div");
   title.id = "main-title";
   const titleText = document.createElement("h2");
-  titleText.textContent = "lol";
+  titleText.textContent = "Hi there";
 
   const button = document.createElement("button");
   button.id = "add-todo-button";

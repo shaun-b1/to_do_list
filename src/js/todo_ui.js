@@ -4,10 +4,10 @@ import { toDoModal } from "./todo_modal";
 import { format, parseISO } from "date-fns";
 export { addAllTodos, addTodoUI, editTodo, updateTodo, deleteTodo };
 
-function addAllTodos() {
+function addAllTodos(project) {
   const todos = document.querySelector("#todos");
   todos.replaceChildren();
-  for (const todo of projectManager.getCurrentProject().todos) {
+  for (const todo of project.todos) {
     addTodoUI(todo);
   }
 }

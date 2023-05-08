@@ -4,34 +4,12 @@ export { projectManager };
 
 const projectManager = (function () {
   const projects = getFromLocalStorage();
-  // [
-  //   {
-  //     title: "Home",
-  //     colour: "orange",
-  //     todos: [
-  //       {
-  //         title: "Hello World",
-  //         description: "This is a todo in the 'Home' project",
-  //         dueDate: "2023-05-13",
-  //         priority: "4",
-  //         creationDate: 1683471038
-  //       },
-  //     ],
-  //   },
-  //   { title: "Inbox", colour: "blue", todos: [] },
-  //   { title: "RaNdOm", colour: "yellow", todos: [] },
-  // ];
   let currentProject;
 
   function findProject(project) {
-    if (typeof project === "number") {
-      let index = project;
-      return index;
-    } else {
-      const projects = document.querySelector("#projects");
-      let index = Array.from(projects.children).indexOf(project);
-      return index;
-    }
+    const projects = document.querySelector("#projects");
+    let index = Array.from(projects.children).indexOf(project);
+    return index;
   }
 
   function addProject(project) {
@@ -39,7 +17,6 @@ const projectManager = (function () {
     currentProject = project;
     addProjectUI(project);
     updateProjectTitle(project);
-    addAllTodos();
     localStorage.setItem("projects", JSON.stringify(projects));
   }
 
@@ -52,14 +29,15 @@ const projectManager = (function () {
   }
 
   function deleteProject(project) {
+    currentProjectOnDelete(project);
     projects.splice(findProject(project), 1);
     localStorage.setItem("projects", JSON.stringify(projects));
   }
 
   function setCurrentProject(project) {
     currentProject = projects[findProject(project)];
-    updateProjectTitle(currentProject);
-    addAllTodos();
+    updateProjectTitle(getCurrentProject());
+    addAllTodos(currentProject);
   }
 
   function getCurrentProject() {
@@ -68,6 +46,16 @@ const projectManager = (function () {
 
   function getFromLocalStorage() {
     return JSON.parse(localStorage.getItem("projects") || "[]");
+  }
+
+  function currentProjectOnDelete(project) {
+    if (projects[findProject(project)] == projects[projects.length - 1]) {
+      console.log(project.previousElementSibling.firstElementChild);
+      project.previousElementSibling.firstElementChild.click();
+    } else {
+      console.log(project.nextElementSibling.firstElementChild);
+      project.nextElementSibling.firstElementChild.click();
+    }
   }
 
   return {
