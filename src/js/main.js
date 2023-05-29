@@ -1,4 +1,3 @@
-import { todoManager } from "./todo_manager";
 import { toDoModal } from "./todo_modal";
 export { main, footer };
 
@@ -14,7 +13,6 @@ function main() {
   button.innerHTML =
     `<span class="material-icons-round"></span>` + "<p>Add todo</p>";
   button.addEventListener("click", () => {
-    todoManager.findTodo();
     document.body.appendChild(toDoModal());
   });
 

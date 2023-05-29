@@ -17,15 +17,29 @@ function projectModal(project) {
   modal.classList.add("modal");
   modal.id = "project-modal";
 
+  const formContainer = document.createElement("div");
+  formContainer.classList.add("form-container");
+
+  const modalHeader = document.createElement("div");
+  modalHeader.classList.add("modal-header");
+  const headerContent = document.createElement("h3");
+  headerContent.textContent = "New Project";
+  const closeModal = document.createElement("button");
+  closeModal.classList.add("material-icons-round");
+  closeModal.textContent = "error";
+  closeModal.addEventListener("click", () => {
+    modal.remove();
+  });
+
   const form = document.createElement("form");
 
   const title = document.createElement("input");
   title.setAttribute("type", "text");
   title.setAttribute("name", "title");
-  if (!project) {
-    title.setAttribute("placeholder", "New Project Title");
-  } else {
+  if (project) {
     title.setAttribute("value", `${project._title}`);
+  } else {
+    title.setAttribute("placeholder", "New Project Title");
   }
   const titleDiv = document.createElement("div");
   titleDiv.appendChild(title);
@@ -54,17 +68,19 @@ function projectModal(project) {
   submit.setAttribute("type", "submit");
   submit.textContent = "Add Project";
   submit.addEventListener("click", (e) => {
-    if (!project) {
-      submitNewProject(e, modal);
-    } else {
+    if (project) {
       submitEditedProject(e, project, modal);
+    } else {
+      submitNewProject(e, modal);
     }
   });
   const submitDiv = document.createElement("div");
   submitDiv.appendChild(submit);
 
   form.append(titleDiv, colourDiv, submitDiv);
-  modal.appendChild(form);
+  modalHeader.append(headerContent, closeModal);
+  formContainer.append(modalHeader, form);
+  modal.appendChild(formContainer);
 
   return modal;
 }

@@ -7,16 +7,19 @@ const projectManager = (function () {
   let currentProject;
 
   function findProject(project) {
-    const projects = document.querySelector("#projects");
-    let index = Array.from(projects.children).indexOf(project);
-    return index;
+    if (project instanceof HTMLElement) {
+      const projects = document.querySelector("#projects");
+      const index = Array.from(projects.children).indexOf(project);
+      return index;
+    } else if (typeof project == "number") {
+      return project;
+    }
   }
 
   function addProject(project) {
     projects.push(project);
-    currentProject = project;
     addProjectUI(project);
-    updateProjectTitle(project);
+    setCurrentProject(projects.indexOf(project));
     localStorage.setItem("projects", JSON.stringify(projects));
   }
 
@@ -29,33 +32,38 @@ const projectManager = (function () {
   }
 
   function deleteProject(project) {
-    currentProjectOnDelete(project);
+    setCurrentProjectOnDelete(project);
     projects.splice(findProject(project), 1);
     localStorage.setItem("projects", JSON.stringify(projects));
-  }
-
-  function setCurrentProject(project) {
-    currentProject = projects[findProject(project)];
-    updateProjectTitle(getCurrentProject());
-    addAllTodos(currentProject);
   }
 
   function getCurrentProject() {
     return currentProject;
   }
 
-  function getFromLocalStorage() {
-    return JSON.parse(localStorage.getItem("projects") || "[]");
+  function setCurrentProject(project) {
+    currentProject = projects[findProject(project)];
+    updateProjectTitle(getCurrentProject());
+    addAllTodos(getCurrentProject());
   }
 
-  function currentProjectOnDelete(project) {
-    if (projects[findProject(project)] == projects[projects.length - 1]) {
-      console.log(project.previousElementSibling.firstElementChild);
+  function setCurrentProjectOnDelete(project) {
+    if (
+      projects[findProject(project)] == projects[projects.length - 1] &&
+      projects.length > 1
+    ) {
       project.previousElementSibling.firstElementChild.click();
-    } else {
-      console.log(project.nextElementSibling.firstElementChild);
+    } else if (projects.length > 1) {
       project.nextElementSibling.firstElementChild.click();
+    } else {
+      currentProject = null;
+      updateProjectTitle(getCurrentProject());
+      return;
     }
+  }
+
+  function getFromLocalStorage() {
+    return JSON.parse(localStorage.getItem("projects") || "[]");
   }
 
   return {

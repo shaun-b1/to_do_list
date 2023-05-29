@@ -83,10 +83,10 @@ function updateProject(project) {
 
 function updateProjectTitle(project) {
   const projectTitle = document.getElementById("main-title").firstChild;
-  if (!project) {
-    projectTitle.textContent = "No Project Selected!";
-  } else {
+  if (projectManager.getCurrentProject() != null) {
     projectTitle.textContent = `${project._title}`;
+  } else if (projectManager.getCurrentProject() == null) {
+    projectTitle.textContent = "No Project Selected!";
   }
 }
 

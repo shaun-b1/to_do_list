@@ -146,6 +146,7 @@ li:hover {
 .project-selector {
   background-color: unset;
   font-size: 1rem;
+  flex-grow: 1;
   display: flex;
   justify-content: flex-start;
   align-items: center;
@@ -236,13 +237,34 @@ li:hover {
   background-color: rgba(0, 0, 0, 0.4);
 }
 
-.modal > form {
+.form-container {
   position: relative;
   margin: 0 auto;
   top: 30%;
   width: 40%;
   height: 30%;
   background: grey;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.modal-header{
+  width: calc(100% - 2rem);
+  display: flex;
+  flex-direction: column-reverse;
+  flex-wrap: wrap;
+  align-items: center;
+  padding: 1rem;
+}
+
+.modal-header > :last-child{
+  align-self: end;
+}
+
+form {
 }
 
 form > * {

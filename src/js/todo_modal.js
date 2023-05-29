@@ -1,6 +1,5 @@
 import { todoManager } from "./todo_manager";
 import { Todo } from "./todo";
-import { projectManager } from "./project_manager";
 export { toDoModal };
 
 const todoPriority = {
@@ -15,15 +14,30 @@ function toDoModal(todo) {
   modal.classList.add("modal");
   modal.id = "todo-modal";
 
+  const formContainer = document.createElement("div");
+  formContainer.classList.add("form-container");
+
+  const modalHeader = document.createElement("div");
+  modalHeader.classList.add("modal-header");
+  const headerContent = document.createElement("h3");
+  headerContent.textContent = "New Todo";
+  const closeModal = document.createElement("button");
+  closeModal.classList.add("material-icons-round");
+  closeModal.textContent = "error";
+  closeModal.addEventListener("click", () => {
+    modal.remove();
+  });
+
   const form = document.createElement("form");
 
   const title = document.createElement("input");
   title.setAttribute("type", "text");
   title.setAttribute("name", "title");
-  if (!todo) {
-    title.setAttribute("placeholder", "New Todo Title");
-  } else {
+  title.setAttribute("required", "required");
+  if (todo) {
     title.setAttribute("value", `${todo._title}`);
+  } else {
+    title.setAttribute("placeholder", "Task Name");
   }
   const titleDiv = document.createElement("div");
   titleDiv.appendChild(title);
@@ -31,10 +45,10 @@ function toDoModal(todo) {
   const description = document.createElement("input");
   description.setAttribute("type", "text");
   description.setAttribute("name", "description");
-  if (!todo) {
-    description.setAttribute("placeholder", "New Todo Description");
-  } else {
+  if (todo) {
     description.setAttribute("value", `${todo._description}`);
+  } else {
+    description.setAttribute("placeholder", "Description");
   }
   const descriptionDiv = document.createElement("div");
   descriptionDiv.appendChild(description);
@@ -56,14 +70,14 @@ function toDoModal(todo) {
       index
     );
   }
-  if (!todo) {
-    priority.options[3].selected = true;
-  } else {
+  if (todo) {
     for (var i = 0; i < priority.options.length; i++) {
       if (priority.options[i].value == todo._priority) {
         priority.options[i].selected = true;
       }
     }
+  } else {
+    priority.options[3].selected = true;
   }
   const priorityDiv = document.createElement("div");
   priorityDiv.appendChild(priority);
@@ -74,14 +88,16 @@ function toDoModal(todo) {
   const submitDiv = document.createElement("div");
   submitDiv.appendChild(submit);
   submit.addEventListener("click", (e) => {
-    if (!todo) {
-      submitNewTodo(e, modal);
-    } else {
+    if (todo) {
       submitEditedTodo(e, todo, modal);
+    } else {
+      submitNewTodo(e, modal);
     }
   });
   form.append(titleDiv, descriptionDiv, dateDiv, priorityDiv, submitDiv);
-  modal.appendChild(form);
+  modalHeader.append(headerContent, closeModal);
+  formContainer.append(modalHeader, form);
+  modal.appendChild(formContainer);
   return modal;
 }
 
@@ -94,7 +110,6 @@ function submitNewTodo(e, modal) {
     document.querySelector('[name="priority"]').value
   );
   todoManager.addTodo(newTodo);
-  console.log(projectManager.getCurrentProject().todos);
   modal.remove();
 }
 

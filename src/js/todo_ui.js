@@ -100,7 +100,7 @@ function deleteTodo() {
   button.classList.add("delete-todo-button", "material-icons-round");
   button.textContent = "delete_outline";
   button.addEventListener("click", (e) => {
-    todoManager.deleteTodo(e.target.parentElement);
+    todoManager.deleteTodo(e.target.parentElement.parentElement);
     button.parentElement.parentElement.remove();
   });
   return button;
