@@ -18,20 +18,18 @@ function header() {
 }
 
 function toggleNav() {
-  const navOpen = window.getComputedStyle(document.querySelector("main"));
-  if (navOpen.getPropertyValue("grid-column") == "2 / 3") {
-    close();
-  } else {
+  const navOpen = document.querySelector(".container");
+  if (navOpen.classList.contains("closed-sidebar")) {
     open();
+  } else {
+    close();
   }
 }
 
 function open() {
-  document.querySelector("aside").style.gridColumn = "1/2";
-  document.querySelector("main").style.gridColumn = "2/3";
+  document.querySelector(".container").classList.remove("closed-sidebar");
 }
 
 function close() {
-  document.querySelector("aside").style.gridColumn = "0/0";
-  document.querySelector("main").style.gridColumn = "1/3";
+  document.querySelector(".container").classList.add("closed-sidebar");
 }
