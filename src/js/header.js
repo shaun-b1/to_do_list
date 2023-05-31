@@ -32,7 +32,6 @@ function open() {
 }
 
 function close() {
-  // document.querySelector('aside').style.display = "none"
   document.querySelector("aside").style.gridColumn = "0/0";
   document.querySelector("main").style.gridColumn = "1/3";
 }
