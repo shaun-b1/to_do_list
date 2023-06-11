@@ -10,12 +10,8 @@ const todoPriority = {
 };
 
 function toDoModal(todo) {
-  const modal = document.createElement("section");
-  modal.classList.add("modal");
-  modal.id = "todo-modal";
-
-  const formContainer = document.createElement("div");
-  formContainer.classList.add("form-container");
+  const dialog = document.createElement("dialog");
+  dialog.id = "todo-modal";
 
   const modalHeader = document.createElement("div");
   modalHeader.classList.add("modal-header");
@@ -25,7 +21,7 @@ function toDoModal(todo) {
   closeModal.classList.add("material-icons-round");
   closeModal.textContent = "error";
   closeModal.addEventListener("click", () => {
-    modal.remove();
+    dialog.remove();
   });
 
   const form = document.createElement("form");
@@ -89,16 +85,17 @@ function toDoModal(todo) {
   submitDiv.appendChild(submit);
   submit.addEventListener("click", (e) => {
     if (todo) {
-      submitEditedTodo(e, todo, modal);
+      submitEditedTodo(e, todo, dialog);
     } else {
-      submitNewTodo(e, modal);
+      submitNewTodo(e, dialog);
     }
   });
+
   form.append(titleDiv, descriptionDiv, dateDiv, priorityDiv, submitDiv);
   modalHeader.append(headerContent, closeModal);
-  formContainer.append(modalHeader, form);
-  modal.appendChild(formContainer);
-  return modal;
+  dialog.append(modalHeader, form);
+
+  return dialog;
 }
 
 function submitNewTodo(e, modal) {

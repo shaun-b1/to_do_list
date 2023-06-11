@@ -13,7 +13,8 @@ function main() {
   button.innerHTML =
     `<span class="material-icons-round"></span>` + "<p>Add todo</p>";
   button.addEventListener("click", () => {
-    document.body.appendChild(toDoModal());
+    const dialog = document.body.appendChild(toDoModal());
+    dialog.showModal();
   });
 
   const todos = document.createElement("ul");

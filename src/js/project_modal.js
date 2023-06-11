@@ -13,12 +13,8 @@ const colourArray = {
 };
 
 function projectModal(project) {
-  const modal = document.createElement("section");
-  modal.classList.add("modal");
-  modal.id = "project-modal";
-
-  const formContainer = document.createElement("div");
-  formContainer.classList.add("form-container");
+  const dialog = document.createElement("dialog");
+  dialog.id = "project-modal";
 
   const modalHeader = document.createElement("div");
   modalHeader.classList.add("modal-header");
@@ -28,7 +24,7 @@ function projectModal(project) {
   closeModal.classList.add("material-icons-round");
   closeModal.textContent = "error";
   closeModal.addEventListener("click", () => {
-    modal.remove();
+    dialog.remove();
   });
 
   const form = document.createElement("form");
@@ -69,9 +65,9 @@ function projectModal(project) {
   submit.textContent = "Add Project";
   submit.addEventListener("click", (e) => {
     if (project) {
-      submitEditedProject(e, project, modal);
+      submitEditedProject(e, project, dialog);
     } else {
-      submitNewProject(e, modal);
+      submitNewProject(e, dialog);
     }
   });
   const submitDiv = document.createElement("div");
@@ -79,28 +75,27 @@ function projectModal(project) {
 
   form.append(titleDiv, colourDiv, submitDiv);
   modalHeader.append(headerContent, closeModal);
-  formContainer.append(modalHeader, form);
-  modal.appendChild(formContainer);
+  dialog.append(modalHeader, form);
 
-  return modal;
+  return dialog;
 }
 
-function submitNewProject(e, modal) {
+function submitNewProject(e, dialog) {
   e.preventDefault();
   const newProject = new Project(
     document.querySelector('[name="title"]').value,
     document.querySelector('[name="colour"]').value
   );
   projectManager.addProject(newProject);
-  modal.remove();
+  dialog.remove();
 }
 
-function submitEditedProject(e, project, modal) {
+function submitEditedProject(e, project, dialog) {
   e.preventDefault();
   projectManager.editProject(
     project,
     document.querySelector('[name="title"]').value,
     document.querySelector('[name="colour"]').value
   );
-  modal.remove();
+  dialog.remove();
 }

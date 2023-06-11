@@ -14,7 +14,8 @@ function aside() {
   button.innerHTML =
     `<span class="material-icons-round"></span>` + "<p>Add project</p>";
   button.addEventListener("click", () => {
-    document.body.appendChild(projectModal());
+    const dialog = document.body.appendChild(projectModal());
+    dialog.showModal();
   });
 
   const projects = document.createElement("ul");
