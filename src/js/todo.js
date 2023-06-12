@@ -2,10 +2,10 @@ export { Todo };
 
 class Todo {
   constructor(title, description, dueDate, priority) {
-    this.title = title;
-    this.description = description;
-    this.dueDate = dueDate;
-    this.priority = priority;
+    this._title = title;
+    this._description = description;
+    this._dueDate = dueDate;
+    this._priority = priority;
     this.creationDate = Date.now();
   }
 

@@ -22,15 +22,15 @@ function addTodoUI(newTodo) {
 
   const title = document.createElement("h3");
   title.classList.add("todo-title");
-  title.textContent = `${newTodo._title}`;
+  title.textContent = `${newTodo.title}`;
 
   const description = document.createElement("p");
   description.classList.add("todo-description");
-  description.textContent = `${newTodo._description}`;
+  description.textContent = `${newTodo.description}`;
 
   const dueDate = document.createElement("p");
   dueDate.classList.add("todo-dueDate");
-  dueDate.textContent = format(parseISO(newTodo._dueDate), "E, do MMM");
+  dueDate.textContent = format(parseISO(newTodo.dueDate), "E, do MMM");
 
   todoContent.append(title, description, dueDate);
 
@@ -52,6 +52,7 @@ function addTodoUI(newTodo) {
   });
   const doneLabel = document.createElement("label");
   doneLabel.htmlFor = `done-input-${newTodo.creationDate}`;
+  doneLabel.classList.add(`priority-${newTodo.priority}`);
   done.append(doneInput, doneLabel);
 
   const buttonSection = document.createElement("div");
@@ -85,14 +86,23 @@ function updateTodo(todo) {
   const editedTodo = Array.from(todos.children).at(
     projectManager.getCurrentProject().todos.indexOf(todo)
   );
-  editedTodo.querySelector(".todo-title").textContent = `${todo._title}`;
+  const partialClass = "priority-";
+  editedTodo.querySelector(".todo-title").textContent = `${todo.title}`;
   editedTodo.querySelector(
     ".todo-description"
-  ).textContent = `${todo._description}`;
+  ).textContent = `${todo.description}`;
   editedTodo.querySelector(".todo-dueDate").textContent = format(
-    parseISO(todo._dueDate),
+    parseISO(todo.dueDate),
     "E, do MMM"
   );
+  editedTodo.querySelector("label").classList.forEach((className) => {
+    if (className.startsWith(partialClass)) {
+      editedTodo
+        .querySelector("label")
+        .classList.replace(className, `priority-${todo.priority}`);
+    }
+  });
+  // .classList.replace('[class^="priority-"]', `priority-${todo.priority}`)
 }
 
 function deleteTodo() {

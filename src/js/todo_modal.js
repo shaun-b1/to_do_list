@@ -31,7 +31,7 @@ function toDoModal(todo) {
   title.setAttribute("name", "title");
   title.setAttribute("required", "required");
   if (todo) {
-    title.setAttribute("value", `${todo._title}`);
+    title.setAttribute("value", `${todo.title}`);
   } else {
     title.setAttribute("placeholder", "Task Name");
   }
@@ -42,7 +42,7 @@ function toDoModal(todo) {
   description.setAttribute("type", "text");
   description.setAttribute("name", "description");
   if (todo) {
-    description.setAttribute("value", `${todo._description}`);
+    description.setAttribute("value", `${todo.description}`);
   } else {
     description.setAttribute("placeholder", "Description");
   }
@@ -53,7 +53,7 @@ function toDoModal(todo) {
   date.setAttribute("type", "date");
   date.setAttribute("name", "date");
   if (todo) {
-    date.setAttribute("value", `${todo._dueDate}`);
+    date.setAttribute("value", `${todo.dueDate}`);
   }
   const dateDiv = document.createElement("div");
   dateDiv.appendChild(date);
@@ -68,7 +68,7 @@ function toDoModal(todo) {
   }
   if (todo) {
     for (var i = 0; i < priority.options.length; i++) {
-      if (priority.options[i].value == todo._priority) {
+      if (priority.options[i].value == todo.priority) {
         priority.options[i].selected = true;
       }
     }

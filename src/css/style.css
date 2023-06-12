@@ -229,6 +229,22 @@ li:hover {
   opacity: 1;
 }
 
+.priority-1 {
+  box-shadow: 0 0 5px red;
+}
+
+.priority-2 {
+  box-shadow: 0 0 5px yellow;
+}
+
+.priority-3 {
+  box-shadow: 0 0 5px blue;
+}
+
+.priority-4 {
+  box-shadow: none
+}
+
 dialog {
   position: absolute;
   margin: 0 auto;
