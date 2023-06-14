@@ -179,13 +179,9 @@ li:hover {
   margin-bottom: 0.7rem;
 }
 
-.todo-content {
-  flex-grow: 2;
-}
-
 .done {
-  position: relative;
   padding: 10px;
+  margin-right: auto;
 }
 
 .done label {
@@ -195,7 +191,7 @@ li:hover {
   cursor: pointer;
   height: 18px;
   left: 0;
-  position: absolute;
+  position: relative;
   top: 50;
   width: 18px;
 }
@@ -234,7 +230,7 @@ li:hover {
 }
 
 .priority-2 {
-  box-shadow: 0 0 5px yellow;
+  box-shadow: 0 0 5px rgb(255, 187, 0);
 }
 
 .priority-3 {
@@ -243,6 +239,34 @@ li:hover {
 
 .priority-4 {
   box-shadow: none
+}
+
+.todo-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  margin-left: 1.5rem;
+}
+
+.todo-content > * {
+  margin-bottom: 10px;
+}
+
+.todo-title {
+  font-size: 1.1rem
+}
+
+.todo-description {
+  font-size: 0.8rem;
+}
+
+
+.todo-dueDate {
+  font-size: 0.8rem;
+}
+
+.todo-button-section {
+  margin-right: 8px;
 }
 
 dialog {
@@ -284,12 +308,6 @@ dialog select {
 
 .modal-header > h3 {
   text-align: center; 
-}
-
-.modal-header > :last-child {
-  position: absolute;
-  right: 2%;
-  top: 2%;
 }
 
 .success-popup {

@@ -28,11 +28,11 @@ function addTodoUI(newTodo) {
   description.classList.add("todo-description");
   description.textContent = `${newTodo.description}`;
 
-  const dueDate = document.createElement("p");
-  dueDate.classList.add("todo-dueDate");
-  dueDate.textContent = format(parseISO(newTodo.dueDate), "E, do MMM");
+  const due = document.createElement("p");
+  due.classList.add("todo-dueDate");
+  due.textContent = format(parseISO(newTodo.dueDate), "E, do MMM");
 
-  todoContent.append(title, description, dueDate);
+  todoContent.append(title, description, due);
 
   const done = document.createElement("div");
   done.classList.add("done");
@@ -70,13 +70,14 @@ function editTodo() {
   button.classList.add("edit-todo-button", "material-icons-round");
   button.textContent = "edit";
   button.addEventListener("click", (e) => {
-    document.body.appendChild(
+    const dialog = document.body.appendChild(
       toDoModal(
         projectManager.getCurrentProject().todos[
           todoManager.findTodo(e.target.parentElement.parentElement)
         ]
       )
     );
+    dialog.showModal();
   });
   return button;
 }
@@ -102,7 +103,6 @@ function updateTodo(todo) {
         .classList.replace(className, `priority-${todo.priority}`);
     }
   });
-  // .classList.replace('[class^="priority-"]', `priority-${todo.priority}`)
 }
 
 function deleteTodo() {

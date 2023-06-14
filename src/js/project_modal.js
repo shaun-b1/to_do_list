@@ -19,13 +19,11 @@ function projectModal(project) {
   const modalHeader = document.createElement("div");
   modalHeader.classList.add("modal-header");
   const headerContent = document.createElement("h3");
-  headerContent.textContent = "New Project";
-  const closeModal = document.createElement("button");
-  closeModal.classList.add("material-icons-round");
-  closeModal.textContent = "error";
-  closeModal.addEventListener("click", () => {
-    dialog.remove();
-  });
+  if (project) {
+    headerContent.textContent = "Edit Project";
+  } else {
+    headerContent.textContent = "New Project";
+  }
 
   const form = document.createElement("form");
 
@@ -37,6 +35,7 @@ function projectModal(project) {
   } else {
     title.setAttribute("placeholder", "New Project Title");
   }
+  title.required = true;
   const titleDiv = document.createElement("div");
   titleDiv.appendChild(title);
 
@@ -74,7 +73,7 @@ function projectModal(project) {
   submitDiv.appendChild(submit);
 
   form.append(titleDiv, colourDiv, submitDiv);
-  modalHeader.append(headerContent, closeModal);
+  modalHeader.appendChild(headerContent);
   dialog.append(modalHeader, form);
 
   return dialog;

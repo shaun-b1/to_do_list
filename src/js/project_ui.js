@@ -56,7 +56,7 @@ function editProject() {
   button.classList.add("edit-project-button", "material-icons-round");
   button.textContent = "edit";
   button.addEventListener("click", (e) => {
-    document.body.appendChild(
+    const dialog = document.body.appendChild(
       projectModal(
         projectManager.projects[
           projectManager.findProject(
@@ -65,6 +65,7 @@ function editProject() {
         ]
       )
     );
+    dialog.showModal();
   });
   return button;
 }
