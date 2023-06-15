@@ -36,8 +36,6 @@ function projectModal(project) {
     title.setAttribute("placeholder", "New Project Title");
   }
   title.required = true;
-  const titleDiv = document.createElement("div");
-  titleDiv.appendChild(title);
 
   const colour = document.createElement("select");
   colour.setAttribute("name", "colour");
@@ -56,23 +54,32 @@ function projectModal(project) {
       }
     }
   }
-  const colourDiv = document.createElement("div");
-  colourDiv.appendChild(colour);
 
+  const buttonSection = document.createElement("div");
+  const close = document.createElement("button");
+  close.setAttribute("type", "button");
+  close.classList.add("close-button");
+  close.textContent = "Close";
+  close.addEventListener("click", () => {
+    dialog.remove();
+  });
   const submit = document.createElement("button");
   submit.setAttribute("type", "submit");
+  submit.classList.add("submit-button");
   submit.textContent = "Add Project";
-  submit.addEventListener("click", (e) => {
+
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
+
     if (project) {
       submitEditedProject(e, project, dialog);
     } else {
       submitNewProject(e, dialog);
     }
   });
-  const submitDiv = document.createElement("div");
-  submitDiv.appendChild(submit);
 
-  form.append(titleDiv, colourDiv, submitDiv);
+  buttonSection.append(close, submit);
+  form.append(title, colour, buttonSection);
   modalHeader.appendChild(headerContent);
   dialog.append(modalHeader, form);
 

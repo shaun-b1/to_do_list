@@ -4,7 +4,7 @@ export { toDoModal };
 
 const todoPriority = {
   1: "Priority 1",
-  2: "Priorty 2",
+  2: "Priority 2",
   3: "Priority 3",
   4: "Priority 4",
 };
@@ -16,13 +16,11 @@ function toDoModal(todo) {
   const modalHeader = document.createElement("div");
   modalHeader.classList.add("modal-header");
   const headerContent = document.createElement("h3");
-  headerContent.textContent = "New Todo";
-  const closeModal = document.createElement("button");
-  closeModal.classList.add("material-icons-round");
-  closeModal.textContent = "error";
-  closeModal.addEventListener("click", () => {
-    dialog.remove();
-  });
+  if (todo) {
+    headerContent.textContent = "Edit Todo";
+  } else {
+    headerContent.textContent = "New Todo";
+  }
 
   const form = document.createElement("form");
 
@@ -35,8 +33,6 @@ function toDoModal(todo) {
   } else {
     title.setAttribute("placeholder", "Task Name");
   }
-  const titleDiv = document.createElement("div");
-  titleDiv.appendChild(title);
 
   const description = document.createElement("input");
   description.setAttribute("type", "text");
@@ -46,8 +42,6 @@ function toDoModal(todo) {
   } else {
     description.setAttribute("placeholder", "Description");
   }
-  const descriptionDiv = document.createElement("div");
-  descriptionDiv.appendChild(description);
 
   const date = document.createElement("input");
   date.setAttribute("type", "date");
@@ -55,8 +49,6 @@ function toDoModal(todo) {
   if (todo) {
     date.setAttribute("value", `${todo.dueDate}`);
   }
-  const dateDiv = document.createElement("div");
-  dateDiv.appendChild(date);
 
   const priority = document.createElement("select");
   priority.setAttribute("name", "priority");
@@ -75,15 +67,23 @@ function toDoModal(todo) {
   } else {
     priority.options[3].selected = true;
   }
-  const priorityDiv = document.createElement("div");
-  priorityDiv.appendChild(priority);
 
+  const buttonSection = document.createElement("div");
+  const close = document.createElement("button");
+  close.setAttribute("type", "button");
+  close.classList.add("close-button");
+  close.textContent = "Close";
+  close.addEventListener("click", () => {
+    dialog.remove();
+  });
   const submit = document.createElement("button");
   submit.setAttribute("type", "submit");
+  submit.classList.add("submit-button");
   submit.textContent = "Add Todo";
-  const submitDiv = document.createElement("div");
-  submitDiv.appendChild(submit);
-  submit.addEventListener("click", (e) => {
+
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
+
     if (todo) {
       submitEditedTodo(e, todo, dialog);
     } else {
@@ -91,8 +91,9 @@ function toDoModal(todo) {
     }
   });
 
-  form.append(titleDiv, descriptionDiv, dateDiv, priorityDiv, submitDiv);
-  modalHeader.append(headerContent, closeModal);
+  buttonSection.append(close, submit);
+  form.append(title, description, date, priority, buttonSection);
+  modalHeader.appendChild(headerContent);
   dialog.append(modalHeader, form);
 
   return dialog;

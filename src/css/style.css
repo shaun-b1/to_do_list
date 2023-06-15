@@ -4,6 +4,7 @@
   --hover-light: rgb(238, 238, 238);
   --hover-dark: rgb(222, 222, 222);
   --highlight: rgb(221, 75, 57);
+  --highlight-hover: rgba(221, 75, 57, 0.8);
   --text-color: rgb(32, 32, 32);
   --shape: 5px
 }
@@ -292,12 +293,43 @@ dialog::backdrop {
   background-color: rgba(0, 0, 0, 0.4);
 }
 
+form {
+  display: flex;
+  flex-direction: column;
+  width: 85%;
+}
+
+form :last-child {
+  display: flex;
+  justify-content: end;
+  gap: 10px;
+}
+
+form :last-child > button {
+  padding: 10px 20px;
+  background-color: var(--hover-dark);
+  border-radius: var(--shape)
+}
+
+form :last-child > button:hover {
+  background-color: var(--hover-light);
+}
+
+form :last-child > :last-child {
+  background-color: var(--highlight);
+}
+
+form :last-child > :last-child:hover {
+  background-color: var(--highlight-hover) ;
+}
+
 dialog input,
 dialog select {
   box-sizing: border-box;
   width: 100%;
   margin-bottom: 0.5rem;
 }
+
 
 .modal-header {
   align-items: center;
