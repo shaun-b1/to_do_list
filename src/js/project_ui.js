@@ -11,7 +11,7 @@ export {
 };
 
 function addAllProjects() {
-  let projects = projectManager.getFromLocalStorage();
+  let projects = projectManager.getProjectsFromLocalStorage();
   for (const project of projects) {
     addProjectUI(project);
   }
@@ -25,10 +25,10 @@ function addProjectUI(newProject) {
   const colour = document.createElement("p");
   colour.textContent = "•";
   colour.classList.add("project-colour");
-  colour.setAttribute("style", `color: ${newProject._colour}`);
+  colour.setAttribute("style", `color: ${newProject.colour}`);
 
   const name = document.createElement("h3");
-  name.textContent = `${newProject._title}`;
+  name.textContent = `${newProject.title}`;
   name.classList.add("project-title");
 
   const projectSelector = document.createElement("button");
@@ -48,6 +48,7 @@ function addProjectUI(newProject) {
   buttonSection.append(editButton, deleteButton);
   project.append(projectSelector, buttonSection);
   projects.appendChild(project);
+
   updateProjectTitle(project);
 }
 
@@ -75,17 +76,17 @@ function updateProject(project) {
   const editedProjectTitle = Array.from(projects.children)
     .at(projectManager.projects.indexOf(project))
     .querySelector(".project-title");
-  editedProjectTitle.textContent = `${project._title}`;
+  editedProjectTitle.textContent = `${project.title}`;
   const editedProjectColour = Array.from(projects.children)
     .at(projectManager.projects.indexOf(project))
     .querySelector(".project-colour");
-  editedProjectColour.setAttribute("style", `color: ${project._colour}`);
+  editedProjectColour.setAttribute("style", `color: ${project.colour}`);
 }
 
 function updateProjectTitle(project) {
   const projectTitle = document.getElementById("main-title").firstChild;
   if (projectManager.getCurrentProject() != null) {
-    projectTitle.textContent = `${project._title}`;
+    projectTitle.textContent = `${project.title}`;
   } else if (projectManager.getCurrentProject() == null) {
     projectTitle.textContent = "No Project Selected!";
   }

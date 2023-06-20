@@ -3,7 +3,7 @@ import { addAllTodos } from "./todo_ui";
 export { projectManager };
 
 const projectManager = (function () {
-  const projects = getFromLocalStorage();
+  const projects = getProjectsFromLocalStorage();
   let currentProject;
 
   function findProject(project) {
@@ -24,8 +24,8 @@ const projectManager = (function () {
   }
 
   function editProject(project, title, colour) {
-    project._title = title;
-    project._colour = colour;
+    project.title = title;
+    project.colour = colour;
     updateProject(project);
     updateProjectTitle(project);
     localStorage.setItem("projects", JSON.stringify(projects));
@@ -62,7 +62,7 @@ const projectManager = (function () {
     }
   }
 
-  function getFromLocalStorage() {
+  function getProjectsFromLocalStorage() {
     return JSON.parse(localStorage.getItem("projects") || "[]");
   }
 
@@ -74,6 +74,6 @@ const projectManager = (function () {
     deleteProject,
     setCurrentProject,
     getCurrentProject,
-    getFromLocalStorage,
+    getProjectsFromLocalStorage,
   };
 })();

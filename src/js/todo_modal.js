@@ -28,6 +28,13 @@ function toDoModal(todo) {
   title.setAttribute("type", "text");
   title.setAttribute("name", "title");
   title.setAttribute("required", "required");
+  title.addEventListener("invalid", () => {
+    if (title.validity.valueMissing) {
+      title.setCustomValidity("You need a todo to do!");
+    } else {
+      title.setCustomValidity("");
+    }
+  });
   if (todo) {
     title.setAttribute("value", `${todo.title}`);
   } else {
@@ -46,6 +53,14 @@ function toDoModal(todo) {
   const date = document.createElement("input");
   date.setAttribute("type", "date");
   date.setAttribute("name", "date");
+  date.setAttribute("required", "required");
+  date.addEventListener("invalid", () => {
+    if (date.validity.valueMissing) {
+      date.setCustomValidity("Please input a valid date");
+    } else {
+      date.setCustomValidity("");
+    }
+  });
   if (todo) {
     date.setAttribute("value", `${todo.dueDate}`);
   }

@@ -31,11 +31,18 @@ function projectModal(project) {
   title.setAttribute("type", "text");
   title.setAttribute("name", "title");
   if (project) {
-    title.setAttribute("value", `${project._title}`);
+    title.setAttribute("value", `${project.title}`);
   } else {
     title.setAttribute("placeholder", "New Project Title");
   }
   title.required = true;
+  title.addEventListener("invalid", () => {
+    if (title.validity.valueMissing) {
+      title.setCustomValidity("Please give your Project a name");
+    } else {
+      title.setCustomValidity("");
+    }
+  });
 
   const colour = document.createElement("select");
   colour.setAttribute("name", "colour");
@@ -49,7 +56,7 @@ function projectModal(project) {
   }
   if (project) {
     for (var i = 0; i < colour.options.length; i++) {
-      if (colour.options[i].value == project._colour) {
+      if (colour.options[i].value == project.colour) {
         colour.options[i].selected = true;
       }
     }
@@ -70,7 +77,6 @@ function projectModal(project) {
 
   form.addEventListener("submit", (e) => {
     e.preventDefault();
-
     if (project) {
       submitEditedProject(e, project, dialog);
     } else {
@@ -87,7 +93,6 @@ function projectModal(project) {
 }
 
 function submitNewProject(e, dialog) {
-  e.preventDefault();
   const newProject = new Project(
     document.querySelector('[name="title"]').value,
     document.querySelector('[name="colour"]').value
@@ -97,7 +102,6 @@ function submitNewProject(e, dialog) {
 }
 
 function submitEditedProject(e, project, dialog) {
-  e.preventDefault();
   projectManager.editProject(
     project,
     document.querySelector('[name="title"]').value,
