@@ -41,9 +41,10 @@ function addTodoUI(newTodo) {
   doneInput.id = `done-input-${newTodo.creationDate}`;
   doneInput.addEventListener("click", (e) => {
     congratulations();
+    todo.style.opacity = 0;
     setTimeout(() => {
       todoManager.deleteTodo(e.target.parentElement.parentElement);
-      doneInput.parentElement.parentElement.remove();
+      todo.remove();
     }, 1500);
     setTimeout(() => {
       const congratulationsModal = document.querySelector(".success-popup");
