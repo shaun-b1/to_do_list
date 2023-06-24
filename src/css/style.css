@@ -307,13 +307,13 @@ form :last-child {
   gap: 10px;
 }
 
-form :last-child > button {
+form :last-child > button, .warning-box > button {
   padding: 10px 20px;
   background-color: var(--hover-dark);
   border-radius: var(--shape)
 }
 
-form :last-child > button:hover {
+form :last-child > button:hover, .warning-box > button:hover {
   background-color: var(--hover-light);
 }
 
@@ -342,6 +342,19 @@ dialog select {
 
 .modal-header > h3 {
   text-align: center; 
+}
+
+.warning-box {
+  width: 250px;
+  height: 150px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.warning-box > p {
+  text-align: center;
+  margin: 1.2rem;
 }
 
 .success-popup {
