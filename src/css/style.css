@@ -308,7 +308,7 @@ form :last-child {
 }
 
 form :last-child > button, .warning-box > button {
-  padding: 10px 20px;
+  padding: 0.8rem 1.2rem;
   background-color: var(--hover-dark);
   border-radius: var(--shape)
 }
@@ -348,7 +348,6 @@ dialog select {
   width: 250px;
   height: 150px;
   display: flex;
-  flex-direction: column;
   justify-content: center;
 }
 
@@ -359,23 +358,17 @@ dialog select {
 
 .success-popup {
   position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  bottom: 2.5rem;
-  padding: 15px 20px;
-  background-color: var(--off-white-one);
-  text-align: center;
-}
-
-.success-popup > div:first-child {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-}
-
-.success-popup > div:last-child {
+  top: 90%;
+  margin: 0 auto;
+  width: 20%;
+  height: 5%;
+  background-color: var(--hover-light);
   display: flex;
   justify-content: center;
-  align-items: center;
-  height: 100%;
+}
+
+.success-popup > button {
+  position: absolute;
+  top: 10%;
+  right: 5%;
 }

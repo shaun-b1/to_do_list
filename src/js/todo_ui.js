@@ -40,7 +40,7 @@ function addTodoUI(newTodo) {
   doneInput.type = "checkbox";
   doneInput.id = `done-input-${newTodo.creationDate}`;
   doneInput.addEventListener("click", (e) => {
-    congratulations();
+    document.body.appendChild(congratulations());
     todo.style.opacity = 0;
     setTimeout(() => {
       todoManager.deleteTodo(e.target.parentElement.parentElement);
@@ -118,23 +118,18 @@ function deleteTodo() {
 }
 
 function congratulations() {
-  const main = document.querySelector("main");
-  const successPopup = document.createElement("div");
-  const closePopup = document.createElement("div");
-  const button = document.createElement("button");
-  const popupContent = document.createElement("div");
-  const text = document.createElement("p");
-
+  const successPopup = document.createElement("dialog");
   successPopup.classList.add("success-popup");
-  text.textContent = "Congrats! 🎉";
-  button.textContent = "x";
 
+  const text = document.createElement("p");
+  text.textContent = "Congrats! 🎉";
+
+  const button = document.createElement("button");
+  button.textContent = "x";
   button.addEventListener("click", () => {
     successPopup.remove();
   });
 
-  closePopup.appendChild(button);
-  popupContent.appendChild(text);
-  successPopup.append(closePopup, popupContent);
-  main.append(successPopup);
+  successPopup.append(text, button);
+  return successPopup;
 }
